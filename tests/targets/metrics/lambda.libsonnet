@@ -1,15 +1,15 @@
-local awsTargets = import '../../../lib/targets/metrics/main.libsonnet';
+local lambda = import '../../../lib/targets/metrics/lambda.libsonnet';
 local test = import 'github.com/jsonnet-libs/testonnet/main.libsonnet';
 
-local actual = awsTargets.new()
-               + awsTargets.lambda.invocations.withFunctionName('MyFunction')
-               + awsTargets.statistics.withSum();
+local actual = lambda.withNamespace();
+
+local expected = { namespace: 'AWS/Lambda' };
 
 test.new(std.thisFile)
 + test.case.new(
-  name='Lambda',
+  name='Lambda metrics namespace',
   test=test.expect.eq(
     actual=actual,
-    expected=actual
+    expected=expected
   )
 )
