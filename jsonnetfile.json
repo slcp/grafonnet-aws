@@ -18,6 +18,15 @@
         }
       },
       "version": "master"
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/crdsonnet/astsonnet.git",
+          "subdir": ""
+        }
+      },
+      "version": "main"
     }
   ],
   "legacyImports": true

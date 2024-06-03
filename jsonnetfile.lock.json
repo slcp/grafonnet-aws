@@ -4,6 +4,16 @@
     {
       "source": {
         "git": {
+          "remote": "https://github.com/crdsonnet/astsonnet.git",
+          "subdir": ""
+        }
+      },
+      "version": "a771663cb9594cd10b30815933fe55554e6a3755",
+      "sum": "k/SJ+F+jjdg+dBMKczPEjcYCEuQ6v0BROdXKdXOCi9o="
+    },
+    {
+      "source": {
+        "git": {
           "remote": "https://github.com/grafana/grafonnet.git",
           "subdir": "gen/grafonnet-latest"
         }
