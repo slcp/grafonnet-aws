@@ -22,6 +22,9 @@ local renderMetricFuncs(metrics) =
     renderMetricFunc, metrics
   );
 
+local renderMetrics(metrics) = a.field.new(a.id.new('metrics'),
+                                           a.object.new(renderMetricFuncs(metrics)));
+
 local renderObject(members) = a.object.new(members).toString();
 
 local renderLocalBind(var, value) = a.local_bind.new(a.bind.new(
@@ -45,14 +48,13 @@ renderImportToLocal('grafana', 'github.com/grafana/grafonnet/gen/grafonnet-lates
 + renderObject(
   [renderNamespace('AWS/Lambda')]
   + [
-    a.field.new(a.id.new('metrics'),
-                a.object.new(renderMetricFuncs([
-                  'Invocations',
-                  'Errors',
-                  'DeadLetterErrors',
-                  'Throttles',
-                  'IteratorAge',
-                  'ConcurrentExecutions',
-                ]))),
+    renderMetrics([
+      'Invocations',
+      'Errors',
+      'DeadLetterErrors',
+      'Throttles',
+      'IteratorAge',
+      'ConcurrentExecutions',
+    ]),
   ]
 )
