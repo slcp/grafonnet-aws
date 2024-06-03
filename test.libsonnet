@@ -2,10 +2,14 @@ local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.l
 local cloudwatchMetrics = grafana.query.cloudWatch.CloudWatchMetricsQuery;
 
 {
-  withInvocations(metric, sourceLibrary): cloudwatchMetrics.withMetricName(metric) + sourceLibrary.withNamespace(),
-  withErrors(metric, sourceLibrary): cloudwatchMetrics.withMetricName(metric) + sourceLibrary.withNamespace(),
-  withDeadLetterErrors(metric, sourceLibrary): cloudwatchMetrics.withMetricName(metric) + sourceLibrary.withNamespace(),
-  withThrottles(metric, sourceLibrary): cloudwatchMetrics.withMetricName(metric) + sourceLibrary.withNamespace(),
-  withIteratorAge(metric, sourceLibrary): cloudwatchMetrics.withMetricName(metric) + sourceLibrary.withNamespace(),
-  withConcurrentExecutions(metric, sourceLibrary): cloudwatchMetrics.withMetricName(metric) + sourceLibrary.withNamespace(),
+  withNamespace(): cloudwatchMetrics.withNamespace('AWS/Lambda'),
+  metrics:
+    {
+      withInvocations(): cloudwatchMetrics.withMetricName('Invocations') + $.withNamespace(),
+      withErrors(): cloudwatchMetrics.withMetricName('Errors') + $.withNamespace(),
+      withDeadLetterErrors(): cloudwatchMetrics.withMetricName('DeadLetterErrors') + $.withNamespace(),
+      withThrottles(): cloudwatchMetrics.withMetricName('Throttles') + $.withNamespace(),
+      withIteratorAge(): cloudwatchMetrics.withMetricName('IteratorAge') + $.withNamespace(),
+      withConcurrentExecutions(): cloudwatchMetrics.withMetricName('ConcurrentExecutions') + $.withNamespace(),
+    },
 }
