@@ -6,9 +6,29 @@ local metrics = [
   'Invocations',
   'Errors',
   'DeadLetterErrors',
+  'DestinationDeliveryFailures',
   'Throttles',
+  'OversizedRecordCount',
+  'ProvisionedConcurrencyInvocations',
+  'ProvisionedConcurrencySpilloverInvocations',
+  'RecursiveInvocationsDropped',
+  'Duration',
+  'PostRuntimeExtensionsDuration',
   'IteratorAge',
+  'OffsetLag',
   'ConcurrentExecutions',
+  'ProvisionedConcurrentExecutions',
+  'ProvisionedConcurrencyUtilization',
+  'UnreservedConcurrentExecutions',
+  'ClaimedAccountConcurrency',
+  'AsyncEventsReceived',
+  'AsyncEventAge',
+  'AsyncEventsDropped',
+];
+local dimensions = [
+  'FunctionName',
+  'Resource',
+  'ExecutedVersion'
 ];
 
 {
@@ -18,7 +38,8 @@ local metrics = [
       [common.renderNamespace(namespace)]
       + [
         common.renderMetrics(metrics),
-      ]
+        common.renderDimensions(dimensions),
+      ] + common.renderHelpers(metrics, dimensions)
     ),
   ),
 }
