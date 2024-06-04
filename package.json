@@ -1,0 +1,17 @@
+{
+  "name": "grafonnet-aws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "pregenerate": "rm -rf ./lib",
+    "generate": "jsonnet -J vendor -S -c -m lib generator/main.jsonnet",
+    "postgenerate": "find ./lib -type f -exec jsonnetfmt -i {} \\;"
+  },
+  "author": "",
+  "license": "ISC"
+}
