@@ -10,7 +10,7 @@
   "scripts": {
     "pregenerate": "rm -rf ./lib",
     "generate": "jsonnet -J vendor -S -c -m lib generator/main.jsonnet",
-    "postgenerate": "find ./lib -type f -exec jsonnetfmt -i {} \\;"
+    "postgenerate": "find ./lib/ -name *.libsonnet -type f -exec jsonnetfmt -i {} \\;"
   },
   "author": "",
   "license": "ISC"
