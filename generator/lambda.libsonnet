@@ -28,7 +28,7 @@ local metrics = [
 local dimensions = [
   'FunctionName',
   'Resource',
-  'ExecutedVersion'
+  'ExecutedVersion',
 ];
 
 {
@@ -42,4 +42,6 @@ local dimensions = [
       ] + common.renderHelpers(metrics, dimensions)
     ),
   ),
+  metrics: metrics,
+  dimensions: dimensions,
 }

@@ -8,6 +8,7 @@
     "test": "tests"
   },
   "scripts": {
+    "test": "jsonnet -J vendor tests/main.jsonnet",
     "pregenerate": "rm -rf ./lib",
     "generate": "jsonnet -J vendor -S -c -m lib generator/main.jsonnet",
     "postgenerate": "find ./lib/ -name *.libsonnet -type f -exec jsonnetfmt -i {} \\;"
