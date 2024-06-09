@@ -1,4 +1,5 @@
-local common = import './common.libsonnet';
+local c = import './common.libsonnet';
+local mc = import './metrics-common.libsonnet';
 
 local destinationPath = 'targets/metrics/lambda.libsonnet';
 local namespace = 'AWS/Lambda';
@@ -33,13 +34,13 @@ local dimensions = [
 
 {
   path: destinationPath,
-  render(): common.render(
-    common.renderObjectToString(
-      [common.renderNamespace(namespace)]
+  render(): c.render(
+    c.renderObjectToString(
+      [mc.renderNamespace(namespace)]
       + [
-        common.renderMetrics(metrics),
-        common.renderDimensions(dimensions),
-      ] + common.renderHelpers(metrics, dimensions)
+        mc.renderMetrics(metrics),
+        mc.renderDimensions(dimensions),
+      ] + mc.renderHelpers(metrics, dimensions)
     ),
   ),
   metrics: metrics,
