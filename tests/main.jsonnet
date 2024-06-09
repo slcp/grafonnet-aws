@@ -1,5 +1,11 @@
-local lambda = import './targets/metrics/lambda.libsonnet';
+local lambdaQ = import './queries/lambda.libsonnet';
+local lambdaM = import './targets/metrics/lambda.libsonnet';
 
 {
-  lambda: lambda,
+  metrics: {
+    lambda: lambdaM,
+  },
+  queries: {
+    lambda: lambdaQ,
+  },
 }

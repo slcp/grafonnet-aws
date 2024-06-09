@@ -17,6 +17,8 @@ local cloudWatchMetricsIdentifier = 'cloudwatchMetrics';
 {
   lowerCaseFirstChar: lowerCaseFirstChar,
   renderObjectToString: renderObjectToString,
+  renderImportToLocalToString: renderImportToLocalToString,
+  renderLocalBindToString: renderLocalBindToString,
   cloudWatchMetricsIdentifier: cloudWatchMetricsIdentifier,
   render(contents): renderImportToLocalToString('grafana', 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet')
                     + renderLocalBindToString(cloudWatchMetricsIdentifier, a.literal.new('grafana.query.cloudWatch.CloudWatchMetricsQuery'))
