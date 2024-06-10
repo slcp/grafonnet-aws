@@ -56,7 +56,7 @@ local renderMetricHelper(m, dimensions) = a.field.new(
   )
 );
 
-// root.[metric].with[dimension](value)
+// root.[metric].by[dimension](regex)
 local renderHelpers(metrics, dimensions) = [
   renderMetricHelper(m, dimensions)
   for m in metrics
