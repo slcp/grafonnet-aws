@@ -19,4 +19,5 @@ local renderStatistics(s) = std.map(renderStatistic, s);
       renderStatistics(statistics)
     ),
   ),
+  statistics: statistics,
 }

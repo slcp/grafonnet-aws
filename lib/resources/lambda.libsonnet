@@ -2,392 +2,543 @@ local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.l
 local cloudwatchMetrics = grafana.query.cloudWatch.CloudWatchMetricsQuery;
 
 local lambda = import '../targets/metrics/lambda.libsonnet';
-local queries = import '../queries/metrics/queries.libsonnet';
+local queries = import '../queries/lambda.libsonnet';
+local statistics = import '../targets/metrics/statistics.libsonnet';
 
 {
   new(name):
     {
+      local root = self,
       name: name,
-      raw_name: name,
+      targets:
+        {
+          invocations:
+            {
+              withSum(): lambda.invocations.withFunctionName(root.name),
+              withAverage(): lambda.invocations.withFunctionName(root.name),
+              withMaximum(): lambda.invocations.withFunctionName(root.name),
+              withMinimum(): lambda.invocations.withFunctionName(root.name),
+            },
+          errors:
+            {
+              withSum(): lambda.errors.withFunctionName(root.name),
+              withAverage(): lambda.errors.withFunctionName(root.name),
+              withMaximum(): lambda.errors.withFunctionName(root.name),
+              withMinimum(): lambda.errors.withFunctionName(root.name),
+            },
+          deadLetterErrors:
+            {
+              withSum(): lambda.deadLetterErrors.withFunctionName(root.name),
+              withAverage(): lambda.deadLetterErrors.withFunctionName(root.name),
+              withMaximum(): lambda.deadLetterErrors.withFunctionName(root.name),
+              withMinimum(): lambda.deadLetterErrors.withFunctionName(root.name),
+            },
+          destinationDeliveryFailures:
+            {
+              withSum(): lambda.destinationDeliveryFailures.withFunctionName(root.name),
+              withAverage(): lambda.destinationDeliveryFailures.withFunctionName(root.name),
+              withMaximum(): lambda.destinationDeliveryFailures.withFunctionName(root.name),
+              withMinimum(): lambda.destinationDeliveryFailures.withFunctionName(root.name),
+            },
+          throttles:
+            {
+              withSum(): lambda.throttles.withFunctionName(root.name),
+              withAverage(): lambda.throttles.withFunctionName(root.name),
+              withMaximum(): lambda.throttles.withFunctionName(root.name),
+              withMinimum(): lambda.throttles.withFunctionName(root.name),
+            },
+          oversizedRecordCount:
+            {
+              withSum(): lambda.oversizedRecordCount.withFunctionName(root.name),
+              withAverage(): lambda.oversizedRecordCount.withFunctionName(root.name),
+              withMaximum(): lambda.oversizedRecordCount.withFunctionName(root.name),
+              withMinimum(): lambda.oversizedRecordCount.withFunctionName(root.name),
+            },
+          provisionedConcurrencyInvocations:
+            {
+              withSum(): lambda.provisionedConcurrencyInvocations.withFunctionName(root.name),
+              withAverage(): lambda.provisionedConcurrencyInvocations.withFunctionName(root.name),
+              withMaximum(): lambda.provisionedConcurrencyInvocations.withFunctionName(root.name),
+              withMinimum(): lambda.provisionedConcurrencyInvocations.withFunctionName(root.name),
+            },
+          provisionedConcurrencySpilloverInvocations:
+            {
+              withSum(): lambda.provisionedConcurrencySpilloverInvocations.withFunctionName(root.name),
+              withAverage(): lambda.provisionedConcurrencySpilloverInvocations.withFunctionName(root.name),
+              withMaximum(): lambda.provisionedConcurrencySpilloverInvocations.withFunctionName(root.name),
+              withMinimum(): lambda.provisionedConcurrencySpilloverInvocations.withFunctionName(root.name),
+            },
+          recursiveInvocationsDropped:
+            {
+              withSum(): lambda.recursiveInvocationsDropped.withFunctionName(root.name),
+              withAverage(): lambda.recursiveInvocationsDropped.withFunctionName(root.name),
+              withMaximum(): lambda.recursiveInvocationsDropped.withFunctionName(root.name),
+              withMinimum(): lambda.recursiveInvocationsDropped.withFunctionName(root.name),
+            },
+          duration:
+            {
+              withSum(): lambda.duration.withFunctionName(root.name),
+              withAverage(): lambda.duration.withFunctionName(root.name),
+              withMaximum(): lambda.duration.withFunctionName(root.name),
+              withMinimum(): lambda.duration.withFunctionName(root.name),
+            },
+          postRuntimeExtensionsDuration:
+            {
+              withSum(): lambda.postRuntimeExtensionsDuration.withFunctionName(root.name),
+              withAverage(): lambda.postRuntimeExtensionsDuration.withFunctionName(root.name),
+              withMaximum(): lambda.postRuntimeExtensionsDuration.withFunctionName(root.name),
+              withMinimum(): lambda.postRuntimeExtensionsDuration.withFunctionName(root.name),
+            },
+          iteratorAge:
+            {
+              withSum(): lambda.iteratorAge.withFunctionName(root.name),
+              withAverage(): lambda.iteratorAge.withFunctionName(root.name),
+              withMaximum(): lambda.iteratorAge.withFunctionName(root.name),
+              withMinimum(): lambda.iteratorAge.withFunctionName(root.name),
+            },
+          offsetLag:
+            {
+              withSum(): lambda.offsetLag.withFunctionName(root.name),
+              withAverage(): lambda.offsetLag.withFunctionName(root.name),
+              withMaximum(): lambda.offsetLag.withFunctionName(root.name),
+              withMinimum(): lambda.offsetLag.withFunctionName(root.name),
+            },
+          concurrentExecutions:
+            {
+              withSum(): lambda.concurrentExecutions.withFunctionName(root.name),
+              withAverage(): lambda.concurrentExecutions.withFunctionName(root.name),
+              withMaximum(): lambda.concurrentExecutions.withFunctionName(root.name),
+              withMinimum(): lambda.concurrentExecutions.withFunctionName(root.name),
+            },
+          provisionedConcurrentExecutions:
+            {
+              withSum(): lambda.provisionedConcurrentExecutions.withFunctionName(root.name),
+              withAverage(): lambda.provisionedConcurrentExecutions.withFunctionName(root.name),
+              withMaximum(): lambda.provisionedConcurrentExecutions.withFunctionName(root.name),
+              withMinimum(): lambda.provisionedConcurrentExecutions.withFunctionName(root.name),
+            },
+          provisionedConcurrencyUtilization:
+            {
+              withSum(): lambda.provisionedConcurrencyUtilization.withFunctionName(root.name),
+              withAverage(): lambda.provisionedConcurrencyUtilization.withFunctionName(root.name),
+              withMaximum(): lambda.provisionedConcurrencyUtilization.withFunctionName(root.name),
+              withMinimum(): lambda.provisionedConcurrencyUtilization.withFunctionName(root.name),
+            },
+          unreservedConcurrentExecutions:
+            {
+              withSum(): lambda.unreservedConcurrentExecutions.withFunctionName(root.name),
+              withAverage(): lambda.unreservedConcurrentExecutions.withFunctionName(root.name),
+              withMaximum(): lambda.unreservedConcurrentExecutions.withFunctionName(root.name),
+              withMinimum(): lambda.unreservedConcurrentExecutions.withFunctionName(root.name),
+            },
+          claimedAccountConcurrency:
+            {
+              withSum(): lambda.claimedAccountConcurrency.withFunctionName(root.name),
+              withAverage(): lambda.claimedAccountConcurrency.withFunctionName(root.name),
+              withMaximum(): lambda.claimedAccountConcurrency.withFunctionName(root.name),
+              withMinimum(): lambda.claimedAccountConcurrency.withFunctionName(root.name),
+            },
+          asyncEventsReceived:
+            {
+              withSum(): lambda.asyncEventsReceived.withFunctionName(root.name),
+              withAverage(): lambda.asyncEventsReceived.withFunctionName(root.name),
+              withMaximum(): lambda.asyncEventsReceived.withFunctionName(root.name),
+              withMinimum(): lambda.asyncEventsReceived.withFunctionName(root.name),
+            },
+          asyncEventAge:
+            {
+              withSum(): lambda.asyncEventAge.withFunctionName(root.name),
+              withAverage(): lambda.asyncEventAge.withFunctionName(root.name),
+              withMaximum(): lambda.asyncEventAge.withFunctionName(root.name),
+              withMinimum(): lambda.asyncEventAge.withFunctionName(root.name),
+            },
+          asyncEventsDropped:
+            {
+              withSum(): lambda.asyncEventsDropped.withFunctionName(root.name),
+              withAverage(): lambda.asyncEventsDropped.withFunctionName(root.name),
+              withMaximum(): lambda.asyncEventsDropped.withFunctionName(root.name),
+              withMinimum(): lambda.asyncEventsDropped.withFunctionName(root.name),
+            },
+        },
     },
-  buildQuery:
+  withQuery:
     {
       invocations:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.invocations.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.invocations.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.invocations.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.invocations.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.invocations.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.invocations.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       errors:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.errors.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.errors.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.errors.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.errors.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.errors.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.errors.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       deadLetterErrors:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.deadLetterErrors.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.deadLetterErrors.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.deadLetterErrors.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.deadLetterErrors.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.deadLetterErrors.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.deadLetterErrors.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       destinationDeliveryFailures:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.destinationDeliveryFailures.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.destinationDeliveryFailures.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.destinationDeliveryFailures.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.destinationDeliveryFailures.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.destinationDeliveryFailures.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.destinationDeliveryFailures.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       throttles:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.throttles.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.throttles.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.throttles.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.throttles.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.throttles.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.throttles.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       oversizedRecordCount:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.oversizedRecordCount.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.oversizedRecordCount.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.oversizedRecordCount.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.oversizedRecordCount.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.oversizedRecordCount.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.oversizedRecordCount.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       provisionedConcurrencyInvocations:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencyInvocations.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencyInvocations.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencyInvocations.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencyInvocations.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencyInvocations.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencyInvocations.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       provisionedConcurrencySpilloverInvocations:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencySpilloverInvocations.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencySpilloverInvocations.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencySpilloverInvocations.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencySpilloverInvocations.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencySpilloverInvocations.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencySpilloverInvocations.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       recursiveInvocationsDropped:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.recursiveInvocationsDropped.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.recursiveInvocationsDropped.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.recursiveInvocationsDropped.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.recursiveInvocationsDropped.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.recursiveInvocationsDropped.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.recursiveInvocationsDropped.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       duration:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.duration.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.duration.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.duration.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.duration.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.duration.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.duration.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       postRuntimeExtensionsDuration:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.postRuntimeExtensionsDuration.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.postRuntimeExtensionsDuration.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.postRuntimeExtensionsDuration.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.postRuntimeExtensionsDuration.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.postRuntimeExtensionsDuration.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.postRuntimeExtensionsDuration.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       iteratorAge:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.iteratorAge.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.iteratorAge.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.iteratorAge.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.iteratorAge.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.iteratorAge.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.iteratorAge.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       offsetLag:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.offsetLag.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.offsetLag.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.offsetLag.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.offsetLag.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.offsetLag.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.offsetLag.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       concurrentExecutions:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.concurrentExecutions.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.concurrentExecutions.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.concurrentExecutions.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.concurrentExecutions.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.concurrentExecutions.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.concurrentExecutions.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       provisionedConcurrentExecutions:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrentExecutions.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrentExecutions.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrentExecutions.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrentExecutions.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrentExecutions.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrentExecutions.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       provisionedConcurrencyUtilization:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencyUtilization.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencyUtilization.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencyUtilization.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencyUtilization.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.provisionedConcurrencyUtilization.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.provisionedConcurrencyUtilization.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       unreservedConcurrentExecutions:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.unreservedConcurrentExecutions.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.unreservedConcurrentExecutions.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.unreservedConcurrentExecutions.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.unreservedConcurrentExecutions.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.unreservedConcurrentExecutions.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.unreservedConcurrentExecutions.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       claimedAccountConcurrency:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.claimedAccountConcurrency.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.claimedAccountConcurrency.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.claimedAccountConcurrency.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.claimedAccountConcurrency.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.claimedAccountConcurrency.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.claimedAccountConcurrency.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       asyncEventsReceived:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventsReceived.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventsReceived.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventsReceived.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventsReceived.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventsReceived.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventsReceived.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       asyncEventAge:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventAge.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventAge.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventAge.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventAge.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventAge.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventAge.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
       asyncEventsDropped:
         {
-          byFunctionName(value):
+          byFunctionName(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventsDropped.byFunctionName(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventsDropped.byFunctionName(value)),
+              identifier: '$' + identifier,
             },
-          byResource(value):
+          byResource(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventsDropped.byResource(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventsDropped.byResource(value)),
+              identifier: '$' + identifier,
             },
-          byExecutedVersion(value):
+          byExecutedVersion(value, identifier):
             {
-              query: grafana.dashboard.variable.query.new('$' + $.raw_name, queries.asyncEventsDropped.byExecutedVersion(value)),
-              name: '$' + $.raw_name,
+              query: grafana.dashboard.variable.query.new('$' + identifier, queries.asyncEventsDropped.byExecutedVersion(value)),
+              identifier: '$' + identifier,
             },
         },
     },
