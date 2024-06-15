@@ -10,7 +10,10 @@ local queriesRelativePath = '../queries';
 
 local renderStatistic(s, fn) = a.field_function.new(
   a.id.new('with' + s),
-  fn
+  a.binary_sum.new([
+    fn,
+    a.functioncall.new(a.literal.new('statistics.with' + s)),
+  ])
 );
 
 local renderStatistics(sts, fn) = std.map(function(s) renderStatistic(s, fn), sts);
@@ -22,8 +25,8 @@ local renderTargetFunc(m) =
       renderStatistics(
         s.statistics,
         a.functioncall.new(a.literal.new('lambda.' + c.lowerCaseFirstChar(m) + '.withFunctionName'))
-        // TODO: How to access the name property of the calling object?
-        + a.functioncall.withArgs(a.literal.new('root.name'))
+        + a.functioncall.withArgs(a.literal.new('root.name')),
+        // TODO: Need to call with StatisticName here
       )
     )
   );
@@ -63,7 +66,10 @@ local renderNew() =
     )
   );
 
-local buildVarName() = a.binary.new('+', a.string.new('$'), a.literal.new('identifier'));
+local buildVarName(s) = a.binary_sum.new([
+  a.literal.new('super.name'),
+  a.string.new(s),
+]);
 
 local renderDimensionHelper(d, m) =
   a.field_function.new(
@@ -73,7 +79,7 @@ local renderDimensionHelper(d, m) =
         a.id.new('query'),
         a.functioncall.new(a.literal.new('grafana.dashboard.variable.query.new'))
         + a.functioncall.withArgs([
-          buildVarName(),
+          buildVarName('by' + d),
           a.functioncall.new(
             a.literal.new('queries.' + c.lowerCaseFirstChar(m) + '.by' + d)
           )
@@ -85,8 +91,8 @@ local renderDimensionHelper(d, m) =
         ]),
       ),
       a.field.new(
-        a.id.new('identifier'),
-        buildVarName()
+        a.id.new('name'),
+        a.binary_sum.new([a.string.new('$'), buildVarName('by' + d)])
       ),
     ])
   )
@@ -95,9 +101,6 @@ local renderDimensionHelper(d, m) =
       [
         a.param.new(
           a.id.new('value')
-        ),
-        a.param.new(
-          a.id.new('identifier')
         ),
       ]
     )
