@@ -335,8 +335,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.invocations.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.invocations.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -344,8 +348,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.invocations.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.invocations.byResource(value),
               name:
                 '$'
                 + super.name
@@ -353,8 +361,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.invocations.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.invocations.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -365,8 +377,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.errors.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.errors.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -374,8 +390,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.errors.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.errors.byResource(value),
               name:
                 '$'
                 + super.name
@@ -383,8 +403,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.errors.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.errors.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -395,8 +419,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.deadLetterErrors.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.deadLetterErrors.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -404,8 +432,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.deadLetterErrors.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.deadLetterErrors.byResource(value),
               name:
                 '$'
                 + super.name
@@ -413,8 +445,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.deadLetterErrors.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.deadLetterErrors.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -425,8 +461,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.destinationDeliveryFailures.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.destinationDeliveryFailures.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -434,8 +474,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.destinationDeliveryFailures.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.destinationDeliveryFailures.byResource(value),
               name:
                 '$'
                 + super.name
@@ -443,8 +487,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.destinationDeliveryFailures.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.destinationDeliveryFailures.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -455,8 +503,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.throttles.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.throttles.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -464,8 +516,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.throttles.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.throttles.byResource(value),
               name:
                 '$'
                 + super.name
@@ -473,8 +529,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.throttles.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.throttles.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -485,8 +545,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.oversizedRecordCount.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.oversizedRecordCount.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -494,8 +558,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.oversizedRecordCount.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.oversizedRecordCount.byResource(value),
               name:
                 '$'
                 + super.name
@@ -503,8 +571,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.oversizedRecordCount.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.oversizedRecordCount.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -515,8 +587,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.provisionedConcurrencyInvocations.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.provisionedConcurrencyInvocations.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -524,8 +600,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.provisionedConcurrencyInvocations.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.provisionedConcurrencyInvocations.byResource(value),
               name:
                 '$'
                 + super.name
@@ -533,8 +613,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.provisionedConcurrencyInvocations.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.provisionedConcurrencyInvocations.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -545,8 +629,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.provisionedConcurrencySpilloverInvocations.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.provisionedConcurrencySpilloverInvocations.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -554,8 +642,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.provisionedConcurrencySpilloverInvocations.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.provisionedConcurrencySpilloverInvocations.byResource(value),
               name:
                 '$'
                 + super.name
@@ -563,8 +655,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.provisionedConcurrencySpilloverInvocations.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.provisionedConcurrencySpilloverInvocations.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -575,8 +671,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.recursiveInvocationsDropped.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.recursiveInvocationsDropped.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -584,8 +684,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.recursiveInvocationsDropped.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.recursiveInvocationsDropped.byResource(value),
               name:
                 '$'
                 + super.name
@@ -593,8 +697,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.recursiveInvocationsDropped.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.recursiveInvocationsDropped.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -605,8 +713,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.duration.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.duration.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -614,8 +726,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.duration.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.duration.byResource(value),
               name:
                 '$'
                 + super.name
@@ -623,8 +739,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.duration.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.duration.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -635,8 +755,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.postRuntimeExtensionsDuration.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.postRuntimeExtensionsDuration.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -644,8 +768,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.postRuntimeExtensionsDuration.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.postRuntimeExtensionsDuration.byResource(value),
               name:
                 '$'
                 + super.name
@@ -653,8 +781,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.postRuntimeExtensionsDuration.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.postRuntimeExtensionsDuration.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -665,8 +797,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.iteratorAge.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.iteratorAge.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -674,8 +810,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.iteratorAge.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.iteratorAge.byResource(value),
               name:
                 '$'
                 + super.name
@@ -683,8 +823,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.iteratorAge.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.iteratorAge.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -695,8 +839,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.offsetLag.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.offsetLag.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -704,8 +852,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.offsetLag.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.offsetLag.byResource(value),
               name:
                 '$'
                 + super.name
@@ -713,8 +865,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.offsetLag.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.offsetLag.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -725,8 +881,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.concurrentExecutions.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.concurrentExecutions.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -734,8 +894,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.concurrentExecutions.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.concurrentExecutions.byResource(value),
               name:
                 '$'
                 + super.name
@@ -743,8 +907,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.concurrentExecutions.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.concurrentExecutions.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -755,8 +923,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.provisionedConcurrentExecutions.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.provisionedConcurrentExecutions.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -764,8 +936,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.provisionedConcurrentExecutions.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.provisionedConcurrentExecutions.byResource(value),
               name:
                 '$'
                 + super.name
@@ -773,8 +949,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.provisionedConcurrentExecutions.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.provisionedConcurrentExecutions.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -785,8 +965,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.provisionedConcurrencyUtilization.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.provisionedConcurrencyUtilization.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -794,8 +978,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.provisionedConcurrencyUtilization.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.provisionedConcurrencyUtilization.byResource(value),
               name:
                 '$'
                 + super.name
@@ -803,8 +991,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.provisionedConcurrencyUtilization.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.provisionedConcurrencyUtilization.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -815,8 +1007,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.unreservedConcurrentExecutions.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.unreservedConcurrentExecutions.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -824,8 +1020,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.unreservedConcurrentExecutions.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.unreservedConcurrentExecutions.byResource(value),
               name:
                 '$'
                 + super.name
@@ -833,8 +1033,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.unreservedConcurrentExecutions.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.unreservedConcurrentExecutions.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -845,8 +1049,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.claimedAccountConcurrency.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.claimedAccountConcurrency.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -854,8 +1062,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.claimedAccountConcurrency.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.claimedAccountConcurrency.byResource(value),
               name:
                 '$'
                 + super.name
@@ -863,8 +1075,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.claimedAccountConcurrency.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.claimedAccountConcurrency.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -875,8 +1091,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.asyncEventsReceived.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.asyncEventsReceived.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -884,8 +1104,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.asyncEventsReceived.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.asyncEventsReceived.byResource(value),
               name:
                 '$'
                 + super.name
@@ -893,8 +1117,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.asyncEventsReceived.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.asyncEventsReceived.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -905,8 +1133,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.asyncEventAge.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.asyncEventAge.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -914,8 +1146,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.asyncEventAge.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.asyncEventAge.byResource(value),
               name:
                 '$'
                 + super.name
@@ -923,8 +1159,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.asyncEventAge.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.asyncEventAge.byExecutedVersion(value),
               name:
                 '$'
                 + super.name
@@ -935,8 +1175,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
         {
           byFunctionName(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byFunctionName', queries.asyncEventsDropped.byFunctionName(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byFunctionName', {
+
+                })
+                + queries.asyncEventsDropped.byFunctionName(value),
               name:
                 '$'
                 + super.name
@@ -944,8 +1188,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byResource(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byResource', queries.asyncEventsDropped.byResource(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byResource', {
+
+                })
+                + queries.asyncEventsDropped.byResource(value),
               name:
                 '$'
                 + super.name
@@ -953,8 +1201,12 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             },
           byExecutedVersion(value):
             {
-              query: grafana.dashboard.variable.query.new(super.name
-                                                          + 'byExecutedVersion', queries.asyncEventsDropped.byExecutedVersion(value)),
+              query:
+                grafana.dashboard.variable.query.new(super.name
+                                                     + 'byExecutedVersion', {
+
+                })
+                + queries.asyncEventsDropped.byExecutedVersion(value),
               name:
                 '$'
                 + super.name

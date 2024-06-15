@@ -26,7 +26,6 @@ local renderTargetFunc(m) =
         s.statistics,
         a.functioncall.new(a.literal.new('lambda.' + c.lowerCaseFirstChar(m) + '.withFunctionName'))
         + a.functioncall.withArgs(a.literal.new('root.name')),
-        // TODO: Need to call with StatisticName here
       )
     )
   );
@@ -77,9 +76,15 @@ local renderDimensionHelper(d, m) =
     a.object.new([
       a.field.new(
         a.id.new('query'),
-        a.functioncall.new(a.literal.new('grafana.dashboard.variable.query.new'))
-        + a.functioncall.withArgs([
-          buildVarName('by' + d),
+        // TODO: Name can be a max length of 50
+        a.binary_sum.new([
+          a.functioncall.new(a.literal.new('grafana.dashboard.variable.query.new'))
+          + a.functioncall.withArgs(
+            [
+              buildVarName('by' + d),
+              a.object.new([]),
+            ]
+          ),
           a.functioncall.new(
             a.literal.new('queries.' + c.lowerCaseFirstChar(m) + '.by' + d)
           )
