@@ -4,11 +4,11 @@ Grafonnet AWS is a [jsonnet](https://jsonnet.org/) library that is intended to b
 
 ## Getting started
 
-### Installation
+### Installation
 
 Grafonnet AWS is expected to be installed with [jsonnet-bundler](https://github.com/jsonnet-bundler/jsonnet-bundler). To do so, make sure you have jsonnet-bundler installed and run the following:
 
-- jb install github.com/slcp/grafonnet-aws/lib@main
+- `jb install github.com/slcp/grafonnet-aws/lib@main`
 
 ## Usage
 
