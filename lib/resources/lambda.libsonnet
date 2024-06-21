@@ -337,9 +337,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.invocations.byFunctionName(value),
               name:
                 '$'
@@ -350,9 +348,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.invocations.byResource(value),
               name:
                 '$'
@@ -363,9 +359,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.invocations.byExecutedVersion(value),
               name:
                 '$'
@@ -379,9 +373,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.errors.byFunctionName(value),
               name:
                 '$'
@@ -392,9 +384,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.errors.byResource(value),
               name:
                 '$'
@@ -405,9 +395,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.errors.byExecutedVersion(value),
               name:
                 '$'
@@ -421,9 +409,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.deadLetterErrors.byFunctionName(value),
               name:
                 '$'
@@ -434,9 +420,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.deadLetterErrors.byResource(value),
               name:
                 '$'
@@ -447,9 +431,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.deadLetterErrors.byExecutedVersion(value),
               name:
                 '$'
@@ -463,9 +445,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.destinationDeliveryFailures.byFunctionName(value),
               name:
                 '$'
@@ -476,9 +456,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.destinationDeliveryFailures.byResource(value),
               name:
                 '$'
@@ -489,9 +467,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.destinationDeliveryFailures.byExecutedVersion(value),
               name:
                 '$'
@@ -505,9 +481,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.throttles.byFunctionName(value),
               name:
                 '$'
@@ -518,9 +492,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.throttles.byResource(value),
               name:
                 '$'
@@ -531,9 +503,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.throttles.byExecutedVersion(value),
               name:
                 '$'
@@ -547,9 +517,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.oversizedRecordCount.byFunctionName(value),
               name:
                 '$'
@@ -560,9 +528,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.oversizedRecordCount.byResource(value),
               name:
                 '$'
@@ -573,9 +539,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.oversizedRecordCount.byExecutedVersion(value),
               name:
                 '$'
@@ -589,9 +553,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.provisionedConcurrencyInvocations.byFunctionName(value),
               name:
                 '$'
@@ -602,9 +564,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.provisionedConcurrencyInvocations.byResource(value),
               name:
                 '$'
@@ -615,9 +575,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.provisionedConcurrencyInvocations.byExecutedVersion(value),
               name:
                 '$'
@@ -631,9 +589,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.provisionedConcurrencySpilloverInvocations.byFunctionName(value),
               name:
                 '$'
@@ -644,9 +600,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.provisionedConcurrencySpilloverInvocations.byResource(value),
               name:
                 '$'
@@ -657,9 +611,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.provisionedConcurrencySpilloverInvocations.byExecutedVersion(value),
               name:
                 '$'
@@ -673,9 +625,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.recursiveInvocationsDropped.byFunctionName(value),
               name:
                 '$'
@@ -686,9 +636,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.recursiveInvocationsDropped.byResource(value),
               name:
                 '$'
@@ -699,9 +647,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.recursiveInvocationsDropped.byExecutedVersion(value),
               name:
                 '$'
@@ -715,9 +661,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.duration.byFunctionName(value),
               name:
                 '$'
@@ -728,9 +672,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.duration.byResource(value),
               name:
                 '$'
@@ -741,9 +683,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.duration.byExecutedVersion(value),
               name:
                 '$'
@@ -757,9 +697,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.postRuntimeExtensionsDuration.byFunctionName(value),
               name:
                 '$'
@@ -770,9 +708,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.postRuntimeExtensionsDuration.byResource(value),
               name:
                 '$'
@@ -783,9 +719,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.postRuntimeExtensionsDuration.byExecutedVersion(value),
               name:
                 '$'
@@ -799,9 +733,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.iteratorAge.byFunctionName(value),
               name:
                 '$'
@@ -812,9 +744,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.iteratorAge.byResource(value),
               name:
                 '$'
@@ -825,9 +755,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.iteratorAge.byExecutedVersion(value),
               name:
                 '$'
@@ -841,9 +769,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.offsetLag.byFunctionName(value),
               name:
                 '$'
@@ -854,9 +780,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.offsetLag.byResource(value),
               name:
                 '$'
@@ -867,9 +791,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.offsetLag.byExecutedVersion(value),
               name:
                 '$'
@@ -883,9 +805,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.concurrentExecutions.byFunctionName(value),
               name:
                 '$'
@@ -896,9 +816,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.concurrentExecutions.byResource(value),
               name:
                 '$'
@@ -909,9 +827,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.concurrentExecutions.byExecutedVersion(value),
               name:
                 '$'
@@ -925,9 +841,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.provisionedConcurrentExecutions.byFunctionName(value),
               name:
                 '$'
@@ -938,9 +852,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.provisionedConcurrentExecutions.byResource(value),
               name:
                 '$'
@@ -951,9 +863,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.provisionedConcurrentExecutions.byExecutedVersion(value),
               name:
                 '$'
@@ -967,9 +877,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.provisionedConcurrencyUtilization.byFunctionName(value),
               name:
                 '$'
@@ -980,9 +888,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.provisionedConcurrencyUtilization.byResource(value),
               name:
                 '$'
@@ -993,9 +899,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.provisionedConcurrencyUtilization.byExecutedVersion(value),
               name:
                 '$'
@@ -1009,9 +913,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.unreservedConcurrentExecutions.byFunctionName(value),
               name:
                 '$'
@@ -1022,9 +924,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.unreservedConcurrentExecutions.byResource(value),
               name:
                 '$'
@@ -1035,9 +935,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.unreservedConcurrentExecutions.byExecutedVersion(value),
               name:
                 '$'
@@ -1051,9 +949,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.claimedAccountConcurrency.byFunctionName(value),
               name:
                 '$'
@@ -1064,9 +960,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.claimedAccountConcurrency.byResource(value),
               name:
                 '$'
@@ -1077,9 +971,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.claimedAccountConcurrency.byExecutedVersion(value),
               name:
                 '$'
@@ -1093,9 +985,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.asyncEventsReceived.byFunctionName(value),
               name:
                 '$'
@@ -1106,9 +996,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.asyncEventsReceived.byResource(value),
               name:
                 '$'
@@ -1119,9 +1007,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.asyncEventsReceived.byExecutedVersion(value),
               name:
                 '$'
@@ -1135,9 +1021,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.asyncEventAge.byFunctionName(value),
               name:
                 '$'
@@ -1148,9 +1032,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.asyncEventAge.byResource(value),
               name:
                 '$'
@@ -1161,9 +1043,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.asyncEventAge.byExecutedVersion(value),
               name:
                 '$'
@@ -1177,9 +1057,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byFunctionName'), {
-
-                })
+                                                             + 'byFunctionName'))
                 + queries.asyncEventsDropped.byFunctionName(value),
               name:
                 '$'
@@ -1190,9 +1068,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byResource'), {
-
-                })
+                                                             + 'byResource'))
                 + queries.asyncEventsDropped.byResource(value),
               name:
                 '$'
@@ -1203,9 +1079,7 @@ local statistics = import '../targets/metrics/statistics.libsonnet';
             {
               query:
                 grafana.dashboard.variable.query.new(std.md5(super.name
-                                                             + 'byExecutedVersion'), {
-
-                })
+                                                             + 'byExecutedVersion'))
                 + queries.asyncEventsDropped.byExecutedVersion(value),
               name:
                 '$'

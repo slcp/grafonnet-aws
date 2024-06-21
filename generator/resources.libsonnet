@@ -85,7 +85,6 @@ local renderDimensionHelper(d, m) =
           + a.functioncall.withArgs(
             [
               hash(buildVarName('by' + d)),
-              a.object.new([]),
             ]
           ),
           a.functioncall.new(
