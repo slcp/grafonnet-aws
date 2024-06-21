@@ -25,6 +25,8 @@ local lambdaPanel = g.panel.timeSeries.new('Some lambda data')
                     + g.panel.timeSeries.options.withTooltip({ mode: 'multi' })
                     + g.panel.timeSeries.queryOptions.withTargetsMixin(context.withContext([
                       exampleLambda.targets.invocations.withSum(),
+                      exampleLambda.targets.errors.withSum(),
+                      exampleLambda.targets.duration.withAverage(),
                     ]));
 
 local variables = [
