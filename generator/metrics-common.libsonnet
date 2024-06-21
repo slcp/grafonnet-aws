@@ -70,16 +70,21 @@ local renderDimensions(dimensions) = a.field.new(
 local renderDimensionHelper(d, m) =
   a.field_function.new(
     a.id.new('with' + d),
-    a.binary.new(
-      '+',
+    a.binary_sum.new([
       a.functioncall.new(
         a.literal.new('$' + '.metrics.with' + m)
       ),
       a.functioncall.new(
         a.literal.new('$' + '.dimensions.with' + d)
       )
-      + a.functioncall.withArgs(a.literal.new('value'))
-    )
+      + a.functioncall.withArgs(a.literal.new('value')),
+      a.functioncall.new(a.literal.new('grafana.query.cloudWatch.CloudWatchMetricsQuery.withMetricQueryType'))
+      + a.functioncall.withArgs(a.literal.new(0)),
+      a.functioncall.new(a.literal.new('grafana.query.cloudWatch.CloudWatchMetricsQuery.withMetricEditorMode'))
+      + a.functioncall.withArgs(a.literal.new(0)),
+      a.functioncall.new(a.literal.new('grafana.query.cloudWatch.CloudWatchMetricsQuery.withQueryMode'))
+      + a.functioncall.withArgs(a.string.new('Metrics')),
+    ])
   )
   + a.field_function.withParams(
     a.params.new(
