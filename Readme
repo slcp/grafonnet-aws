@@ -1,0 +1,15 @@
+# Grafonnet AWS
+
+Grafonnet AWS is a [jsonnet](https://jsonnet.org/) library that is intended to be used with [Grafonnet](https://grafana.github.io/grafonnet/index.html) to help simplify building Grafana dashboards and panels. The intention of the library is to provide a an easy to read interface for producing Grafana assets, it is build on top of the existing provision in Grafonnet for interacting with Cloudwatch.
+
+## Getting started
+
+### Installation
+
+Grafonnet AWS is expected to be installed with [jsonnet-bundler](https://github.com/jsonnet-bundler/jsonnet-bundler). To do so, make sure you have jsonnet-bundler installed and run the following:
+
+- jb install github.com/slcp/grafonnet-aws/lib@main
+
+## Usage
+
+Please see the examples folder for this information.
