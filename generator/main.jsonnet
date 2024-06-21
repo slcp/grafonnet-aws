@@ -4,6 +4,7 @@ local files = [
   import './dependencies.libsonnet',
   import './queries.libsonnet',
   import './resources.libsonnet',
+  import './context.libsonnet',
 ];
 
 {
