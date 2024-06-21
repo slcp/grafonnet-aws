@@ -10,30 +10,44 @@ local metricsRelativePath = '../targets/metrics';
 local renderDimensionHelper(d, m) =
   a.field_function.new(
     a.id.new('by' + d),
-    a.binary.new(
-      '+',
-      a.object.new([
-        a.field.new(
-          a.id.new('query'),
-          a.binary.new(
-            '+',
-            a.functioncall.new(
-              a.literal.new('lambda.metrics.with' + m)
-            ),
+    a.binary_sum.new(
+      [
+        a.object.new([
+          a.field.new(
+            a.id.new('query'),
+            a.binary_sum.new([
+              a.functioncall.new(
+                a.literal.new('lambda.metrics.with' + m)
+              ),
+              a.object.new(
+                [
+                  a.field.new(
+                    a.id.new('dimensionKey'),
+                    a.string.new(d)
+                  ),
+                ]
+              ),
+            ])
+          )
+          + a.field.withAdditive(true),
+        ]),
+        a.object.new([
+          a.field.new(
+            a.id.new('query'),
             a.object.new(
               [
                 a.field.new(
-                  a.id.new('dimensionKey'),
-                  a.string.new(d)
+                  a.id.new('queryType'),
+                  a.string.new("dimensionValues")
                 ),
               ]
             )
           )
-        )
-        + a.field.withAdditive(true),
-      ]),
-      a.functioncall.new(a.literal.new('grafana.dashboard.variable.query.withRegex'))
-      + a.functioncall.withArgs(a.literal.new('value'))
+          + a.field.withAdditive(true),
+        ]),
+        a.functioncall.new(a.literal.new('grafana.dashboard.variable.query.withRegex'))
+        + a.functioncall.withArgs(a.literal.new('value')),
+      ]
     )
   )
   + a.field_function.withParams(
