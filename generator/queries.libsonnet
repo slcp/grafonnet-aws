@@ -25,23 +25,13 @@ local renderDimensionHelper(d, m) =
                     a.id.new('dimensionKey'),
                     a.string.new(d)
                   ),
+                  a.field.new(
+                    a.id.new('queryType'),
+                    a.string.new('dimensionValues')
+                  ),
                 ]
               ),
             ])
-          )
-          + a.field.withAdditive(true),
-        ]),
-        a.object.new([
-          a.field.new(
-            a.id.new('query'),
-            a.object.new(
-              [
-                a.field.new(
-                  a.id.new('queryType'),
-                  a.string.new("dimensionValues")
-                ),
-              ]
-            )
           )
           + a.field.withAdditive(true),
         ]),
@@ -76,6 +66,28 @@ local renderHelpers(metrics, dimensions) = [
   for m in metrics
 ];
 
+local renderWithAccountId() =
+  a.field_function.new(
+    a.id.new('withAccountId'),
+    a.object.new([
+      a.field.new(
+        a.id.new('query'),
+        a.object.new([
+          a.field.new(
+            a.id.new('accountId'),
+            a.literal.new('value')
+          ),
+        ])
+      )
+      + a.field.withAdditive(true),
+    ]),
+  )
+  + a.field_function.withParams(
+    a.params.new([
+      a.param.new(a.id.new('value')),
+    ]),
+  );
+
 {
   path: destinationPath,
   render(): c.render(
@@ -85,7 +97,9 @@ local renderHelpers(metrics, dimensions) = [
       renderHelpers(
         l.metrics,
         l.dimensions
-      )
+      ) + [
+        renderWithAccountId(),
+      ]
     ),
   ),
 }

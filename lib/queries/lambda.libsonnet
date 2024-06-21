@@ -12,12 +12,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withInvocations()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -26,12 +22,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withInvocations()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -40,12 +32,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withInvocations()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -57,12 +45,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withErrors()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -71,12 +55,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withErrors()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -85,12 +65,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withErrors()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -102,12 +78,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDeadLetterErrors()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -116,12 +88,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDeadLetterErrors()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -130,12 +98,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDeadLetterErrors()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -147,12 +111,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDestinationDeliveryFailures()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -161,12 +121,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDestinationDeliveryFailures()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -175,12 +131,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDestinationDeliveryFailures()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -192,12 +144,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withThrottles()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -206,12 +154,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withThrottles()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -220,12 +164,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withThrottles()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -237,12 +177,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withOversizedRecordCount()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -251,12 +187,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withOversizedRecordCount()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -265,12 +197,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withOversizedRecordCount()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -282,12 +210,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencyInvocations()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -296,12 +220,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencyInvocations()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -310,12 +230,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencyInvocations()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -327,12 +243,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencySpilloverInvocations()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -341,12 +253,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencySpilloverInvocations()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -355,12 +263,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencySpilloverInvocations()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -372,12 +276,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withRecursiveInvocationsDropped()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -386,12 +286,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withRecursiveInvocationsDropped()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -400,12 +296,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withRecursiveInvocationsDropped()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -417,12 +309,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDuration()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -431,12 +319,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDuration()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -445,12 +329,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withDuration()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -462,12 +342,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withPostRuntimeExtensionsDuration()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -476,12 +352,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withPostRuntimeExtensionsDuration()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -490,12 +362,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withPostRuntimeExtensionsDuration()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -507,12 +375,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withIteratorAge()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -521,12 +385,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withIteratorAge()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -535,12 +395,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withIteratorAge()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -552,12 +408,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withOffsetLag()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -566,12 +418,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withOffsetLag()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -580,12 +428,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withOffsetLag()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -597,12 +441,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withConcurrentExecutions()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -611,12 +451,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withConcurrentExecutions()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -625,12 +461,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withConcurrentExecutions()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -642,12 +474,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrentExecutions()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -656,12 +484,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrentExecutions()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -670,12 +494,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrentExecutions()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -687,12 +507,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencyUtilization()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -701,12 +517,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencyUtilization()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -715,12 +527,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withProvisionedConcurrencyUtilization()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -732,12 +540,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withUnreservedConcurrentExecutions()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -746,12 +550,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withUnreservedConcurrentExecutions()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -760,12 +560,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withUnreservedConcurrentExecutions()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -777,12 +573,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withClaimedAccountConcurrency()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -791,12 +583,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withClaimedAccountConcurrency()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -805,12 +593,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withClaimedAccountConcurrency()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -822,12 +606,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventsReceived()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -836,12 +616,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventsReceived()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -850,12 +626,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventsReceived()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -867,12 +639,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventAge()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -881,12 +649,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventAge()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -895,12 +659,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventAge()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
@@ -912,12 +672,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventsDropped()
             + {
               dimensionKey: 'FunctionName',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byResource(value):
@@ -926,12 +682,8 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventsDropped()
             + {
               dimensionKey: 'Resource',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
       byExecutedVersion(value):
@@ -940,13 +692,16 @@ local lambda = import '../targets/metrics/lambda.libsonnet';
             lambda.metrics.withAsyncEventsDropped()
             + {
               dimensionKey: 'ExecutedVersion',
+              queryType: 'dimensionValues',
             },
-        }
-        + {
-          query+: {
-            queryType: 'dimensionValues',
-          },
         }
         + grafana.dashboard.variable.query.withRegex(value),
     },
+  withAccountId(value): {
+    query+: {
+      query+: {
+        accountId: value,
+      },
+    },
+  },
 }

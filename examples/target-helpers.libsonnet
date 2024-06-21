@@ -1,3 +1,4 @@
+local q = import '../lib/queries/lambda.libsonnet';
 local l = import '../lib/resources/lambda.libsonnet';
 local lm = import '../lib/targets/metrics/lambda.libsonnet';
 local s = import '../lib/targets/metrics/statistics.libsonnet';
@@ -7,10 +8,13 @@ local name = 'New dashboard';
 local description = 'This is a new dashboard';
 
 local cloudwatchDatasource = g.dashboard.variable.datasource.new('datasource', 'cloudwatch');
+local accountId = g.query.cloudWatch.CloudWatchMetricsQuery.withAccountId('278393477552');
+local region = g.query.cloudWatch.CloudWatchMetricsQuery.withRegion('eu-west-1');
 
 local exampleLambdaName = 'TelemetryCore-TelemetrySt-InfluxWriterByReadings00';
 local exampleLambdaWithQuery = l.new(exampleLambdaName)
-                               + l.withQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/');
+                               + l.withQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/')
+                               + q.withAccountId('278393477552');
 local exampleLambdaWithoutQuery = l.new(exampleLambdaName);
 
 local lambdaPanel = g.panel.timeSeries.new('Some lambda data')
@@ -19,19 +23,8 @@ local lambdaPanel = g.panel.timeSeries.new('Some lambda data')
                     + g.panel.timeSeries.queryOptions.withTargetsMixin([
                       exampleLambdaWithQuery.targets.invocations.withSum()
                       + g.dashboard.variable.query.withDatasourceFromVariable(cloudwatchDatasource)
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withAccountId('278393477552')
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withRegion('eu-west-1')
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withMetricQueryType(0)
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withMetricEditorMode(0)
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withQueryMode('Metrics'),
-                      lm.invocations.withFunctionName(exampleLambdaWithoutQuery.name)
-                      + s.withSum()
-                      + g.dashboard.variable.query.withDatasourceFromVariable(cloudwatchDatasource)
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withAccountId('278393477552')
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withRegion('eu-west-1')
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withMetricQueryType(0)
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withMetricEditorMode(0)
-                      + g.query.cloudWatch.CloudWatchMetricsQuery.withQueryMode('Metrics'),
+                      + accountId
+                      + region,
                     ]);
 
 local variables = [
