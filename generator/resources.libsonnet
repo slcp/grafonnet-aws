@@ -40,6 +40,8 @@ local renderTargetHelpers(metrics) = a.field.new(
   a.object.new(renderTargetFuncs(metrics))
 );
 
+local hash(s) = a.functioncall.new(a.literal.new('std.md5')) + a.functioncall.withArgs(s);
+
 local renderNew() =
   a.field_function.new(
     a.id.new('new'),
@@ -77,11 +79,12 @@ local renderDimensionHelper(d, m) =
       a.field.new(
         a.id.new('query'),
         // TODO: Name can be a max length of 50
+        // std.md5()
         a.binary_sum.new([
           a.functioncall.new(a.literal.new('grafana.dashboard.variable.query.new'))
           + a.functioncall.withArgs(
             [
-              buildVarName('by' + d),
+              hash(buildVarName('by' + d)),
               a.object.new([]),
             ]
           ),
@@ -97,7 +100,7 @@ local renderDimensionHelper(d, m) =
       ),
       a.field.new(
         a.id.new('name'),
-        a.binary_sum.new([a.string.new('$'), buildVarName('by' + d)])
+        a.binary_sum.new([a.string.new('$'), hash(buildVarName('by' + d))])
       ),
     ])
   )
