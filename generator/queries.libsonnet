@@ -6,7 +6,7 @@ local g = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonn
 local destinationPath = 'queries/lambda.libsonnet';
 local metricsRelativePath = '../targets/metrics';
 
-// Intedned to be used with var.query.new() + lambda.invocations.byFunction.withFunctionName('functionName')
+// Intened to be used with var.query.new() + lambda.invocations.byFunction.withFunctionName('functionName')
 local renderDimensionHelper(d, m) =
   a.field_function.new(
     a.id.new('by' + d),
@@ -74,10 +74,16 @@ local renderWithAccountId() =
         a.id.new('query'),
         a.object.new([
           a.field.new(
-            a.id.new('accountId'),
-            a.literal.new('value')
-          ),
-        ])
+            a.id.new('query'),
+            a.object.new([
+              a.field.new(
+                a.id.new('accountId'),
+                a.literal.new('value')
+              ),
+            ])
+          )
+          + a.field.withAdditive(true),
+        ]),
       )
       + a.field.withAdditive(true),
     ]),
@@ -98,6 +104,7 @@ local renderWithAccountId() =
         l.metrics,
         l.dimensions
       ) + [
+        // TODO: Build an accountId construct and treat it as a first class citizen
         renderWithAccountId(),
       ]
     ),
