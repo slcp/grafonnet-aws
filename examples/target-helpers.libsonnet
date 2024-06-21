@@ -1,5 +1,6 @@
 local q = import '../lib/queries/lambda.libsonnet';
 local l = import '../lib/resources/lambda.libsonnet';
+local c = import '../lib/targets/context.libsonnet';
 local lm = import '../lib/targets/metrics/lambda.libsonnet';
 local s = import '../lib/targets/metrics/statistics.libsonnet';
 local g = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
@@ -11,24 +12,23 @@ local cloudwatchDatasource = g.dashboard.variable.datasource.new('datasource', '
 local accountId = g.query.cloudWatch.CloudWatchMetricsQuery.withAccountId('278393477552');
 local region = g.query.cloudWatch.CloudWatchMetricsQuery.withRegion('eu-west-1');
 
+local context = c.new(accountId, region, cloudwatchDatasource);
+
 local exampleLambdaName = 'TelemetryCore-TelemetrySt-InfluxWriterByReadings00';
-local exampleLambdaWithQuery = l.new(exampleLambdaName)
-                               + l.withQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/')
-                               + q.withAccountId('278393477552');
+local exampleLambda = l.new(exampleLambdaName)
+                      + l.withQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/')
+                      + q.withAccountId('278393477552');
 local exampleLambdaWithoutQuery = l.new(exampleLambdaName);
 
 local lambdaPanel = g.panel.timeSeries.new('Some lambda data')
                     + g.panel.timeSeries.standardOptions.withUnit('short')
                     + g.panel.timeSeries.options.withTooltip({ mode: 'multi' })
-                    + g.panel.timeSeries.queryOptions.withTargetsMixin([
-                      exampleLambdaWithQuery.targets.invocations.withSum()
-                      + g.dashboard.variable.query.withDatasourceFromVariable(cloudwatchDatasource)
-                      + accountId
-                      + region,
-                    ]);
+                    + g.panel.timeSeries.queryOptions.withTargetsMixin(context.withContext([
+                      exampleLambda.targets.invocations.withSum(),
+                    ]));
 
 local variables = [
-  exampleLambdaWithQuery.query
+  exampleLambda.query
   + g.dashboard.variable.query.withDatasourceFromVariable(cloudwatchDatasource),
   cloudwatchDatasource,
 ];
