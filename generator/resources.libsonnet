@@ -78,8 +78,6 @@ local renderDimensionHelper(d, m) =
     a.object.new([
       a.field.new(
         a.id.new('query'),
-        // TODO: Name can be a max length of 50
-        // std.md5()
         a.binary_sum.new([
           a.functioncall.new(a.literal.new('grafana.dashboard.variable.query.new'))
           + a.functioncall.withArgs(

@@ -9,15 +9,21 @@ local renderLocalRoot() =
     a.literal.new('self')
   );
 
-local renderWithContext() =
+local renderWrap() =
   a.field_function.new(
-    a.id.new('withContext'),
+    a.id.new('wrap'),
     a.forloop.new(
       a.binary_sum.new([
         a.literal.new('target'),
         a.binary_sum.new([
-          a.literal.new('root.region'),
-          a.literal.new('root.accountId'),
+          a.functioncall.new(a.literal.new('grafana.query.cloudWatch.CloudWatchMetricsQuery.withRegion'))
+          + a.functioncall.withArgs([
+            a.id.new('root.region'),
+          ]),
+          a.functioncall.new(a.literal.new('grafana.query.cloudWatch.CloudWatchMetricsQuery.withAccountId'))
+          + a.functioncall.withArgs([
+            a.id.new('root.accountId'),
+          ]),
           a.functioncall.new(a.literal.new('grafana.dashboard.variable.query.withDatasourceFromVariable'))
           + a.functioncall.withArgs([
             a.id.new('root.datasource'),
@@ -40,47 +46,85 @@ local renderWithContext() =
     )
   );
 
-local renderNew() =
+local renderWithAccountId() =
   a.field_function.new(
-    a.id.new('new'),
+    a.id.new('withAccountId'),
     a.object.new([
-      renderLocalRoot(),
-      renderWithContext(),
-      a.field.new(
-        a.id.new('region'),
-        a.literal.new('region')
-      ),
       a.field.new(
         a.id.new('accountId'),
-        a.literal.new('accountId')
+        a.literal.new('value')
       ),
-      a.field.new(
-        a.id.new('datasource'),
-        a.literal.new('datasource')
-      ),
-    ]),
+    ])
   )
   + a.field_function.withParams(
     a.params.new(
       [
         a.param.new(
-          a.id.new('accountId')
-        ),
-        a.param.new(
-          a.id.new('region')
-        ),
-        a.param.new(
-          a.id.new('datasource')
+          a.id.new('value')
         ),
       ]
     )
+  );
+
+local renderWithRegion() =
+  a.field_function.new(
+    a.id.new('withRegion'),
+    a.object.new([
+      a.field.new(
+        a.id.new('region'),
+        a.literal.new('value')
+      ),
+    ])
+  )
+  + a.field_function.withParams(
+    a.params.new(
+      [
+        a.param.new(
+          a.id.new('value')
+        ),
+      ]
+    )
+  );
+
+local renderWithDatasourceFromVariable() =
+  a.field_function.new(
+    a.id.new('withDatasourceFromVariable'),
+    a.object.new([
+      a.field.new(
+        a.id.new('datasource'),
+        a.literal.new('value')
+      ),
+    ])
+  )
+  + a.field_function.withParams(
+    a.params.new(
+      [
+        a.param.new(
+          a.id.new('value')
+        ),
+      ]
+    )
+  );
+
+local renderNew() =
+  a.field_function.new(
+    a.id.new('new'),
+    a.object.new([
+      renderLocalRoot(),
+      renderWrap(),
+    ]),
   );
 
 {
   path: destinationPath,
   render(): c.render(
     c.renderObjectToString(
-      [renderNew()]
+      [
+        renderNew(),
+        renderWithAccountId(),
+        renderWithRegion(),
+        renderWithDatasourceFromVariable(),
+      ]
     )
   ),
 }

@@ -9,10 +9,13 @@ local name = 'New dashboard';
 local description = 'This is a new dashboard';
 
 local cloudwatchDatasource = g.dashboard.variable.datasource.new('datasource', 'cloudwatch');
-local accountId = g.query.cloudWatch.CloudWatchMetricsQuery.withAccountId('278393477552');
-local region = g.query.cloudWatch.CloudWatchMetricsQuery.withRegion('eu-west-1');
+local accountId = '278393477552';  // OR $accountId
+local region = 'eu-west-1';  // OR §region
 
-local context = c.new(accountId, region, cloudwatchDatasource);
+local context = c.new()
+                + c.withAccountId(accountId)
+                + c.withRegion(region)
+                + c.withDatasourceFromVariable(cloudwatchDatasource);
 
 local exampleLambdaName = 'TelemetryCore-TelemetrySt-InfluxWriterByReadings00';
 local exampleLambda = l.new(exampleLambdaName)
@@ -23,7 +26,7 @@ local exampleLambdaWithoutQuery = l.new(exampleLambdaName);
 local lambdaPanel = g.panel.timeSeries.new('Some lambda data')
                     + g.panel.timeSeries.standardOptions.withUnit('short')
                     + g.panel.timeSeries.options.withTooltip({ mode: 'multi' })
-                    + g.panel.timeSeries.queryOptions.withTargetsMixin(context.withContext([
+                    + g.panel.timeSeries.queryOptions.withTargetsMixin(context.wrap([
                       exampleLambda.targets.invocations.withSum(),
                       exampleLambda.targets.errors.withSum(),
                       exampleLambda.targets.duration.withAverage(),

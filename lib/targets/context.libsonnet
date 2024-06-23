@@ -2,19 +2,25 @@ local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.l
 local cloudwatchMetrics = grafana.query.cloudWatch.CloudWatchMetricsQuery;
 
 {
-  new(accountId, region, datasource):
+  new():
     {
       local root = self,
-      withContext(targets):
+      wrap(targets):
         [
           target
-          + root.region
-          + root.accountId
+          + grafana.query.cloudWatch.CloudWatchMetricsQuery.withRegion(root.region)
+          + grafana.query.cloudWatch.CloudWatchMetricsQuery.withAccountId(root.accountId)
           + grafana.dashboard.variable.query.withDatasourceFromVariable(root.datasource)
           for target in targets
         ],
-      region: region,
-      accountId: accountId,
-      datasource: datasource,
     },
+  withAccountId(value): {
+    accountId: value,
+  },
+  withRegion(value): {
+    region: value,
+  },
+  withDatasourceFromVariable(value): {
+    datasource: value,
+  },
 }
