@@ -18,6 +18,7 @@ local convenienceTests = std.foldl(
               dimensionKey: d,
               metricName: m,
               namespace: 'AWS/Lambda',
+              queryType: 'dimensionValues',
             } }
           )
         ), generator.dimensions, {}

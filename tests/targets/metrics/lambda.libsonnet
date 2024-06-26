@@ -39,7 +39,9 @@ local convenienceTests = std.foldl(
           name='Lambda convenience',
           test=test.expect.eq(
             actual=lambda[common.lowerCaseFirstChar(m)]['with' + d]('value'),
-            expected={ metricName: m } + { dimensions: { [d]: 'value' } } + namespace
+            expected={ metricName: m } + { dimensions: { [d]: 'value' } } +
+                     { metricEditorMode: 0, metricName: m, metricQueryType: 0, queryMode: 'Metrics' }
+                     + namespace
           )
         ), generator.dimensions, {}
     ),
