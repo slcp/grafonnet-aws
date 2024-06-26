@@ -13,7 +13,7 @@
     "test": "jsonnet -J vendor tests/main.jsonnet",
     "generate:examples": "jsonnet -J vendor -c -m examples examples/main.jsonnet",
     "pregenerate:lib": "rm -rf ./lib",
-    "generate:lib": "jsonnet -J vendor -S -c -m lib generator/main.jsonnet",
+    "generate:lib": "cp -r generator/static lib && jsonnet -J vendor -S -c -m lib generator/main.jsonnet",
     "postgenerate:lib": "find ./lib/ -name *.libsonnet -type f -exec jsonnetfmt -i {} \\;"
   },
   "author": "",
