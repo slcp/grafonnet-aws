@@ -7,13 +7,13 @@ local cloudwatchMetrics = grafana.query.cloudWatch.CloudWatchMetricsQuery;
       local root = self,
       wrap(targets)::
         [
-          local region = if root.region != null then
+          local region = if std.objectHas(root, 'region') then
             grafana.query.cloudWatch.CloudWatchMetricsQuery.withRegion(root.region)
           else {};
-          local datasource = if root.datasource != null then
+          local accountId = if std.objectHas(root, 'accountId') then
             grafana.query.cloudWatch.CloudWatchMetricsQuery.withAccountId(root.accountId)
           else {};
-          local accountId = if root.accountId != null then
+          local datasource = if std.objectHas(root, 'datasource') then
             grafana.dashboard.variable.query.withDatasourceFromVariable(root.datasource)
           else {};
 
