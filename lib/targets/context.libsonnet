@@ -5,12 +5,22 @@ local cloudwatchMetrics = grafana.query.cloudWatch.CloudWatchMetricsQuery;
   new():
     {
       local root = self,
-      wrap(targets):
+      wrap(targets)::
         [
+          local region = if root.region != null then
+            grafana.query.cloudWatch.CloudWatchMetricsQuery.withRegion(root.region)
+          else {};
+          local datasource = if root.datasource != null then
+            grafana.query.cloudWatch.CloudWatchMetricsQuery.withAccountId(root.accountId)
+          else {};
+          local accountId = if root.accountId != null then
+            grafana.dashboard.variable.query.withDatasourceFromVariable(root.datasource)
+          else {};
+
           target
-          + grafana.query.cloudWatch.CloudWatchMetricsQuery.withRegion(root.region)
-          + grafana.query.cloudWatch.CloudWatchMetricsQuery.withAccountId(root.accountId)
-          + grafana.dashboard.variable.query.withDatasourceFromVariable(root.datasource)
+          + region
+          + datasource
+          + accountId
           for target in targets
         ],
     },
