@@ -17,9 +17,11 @@ local context = c.new()
                 + c.withRegion(region)
                 + c.withDatasourceFromVariable(cloudwatchDatasource);
 
-local exampleLambdaName = 'TelemetryCore-TelemetrySt-InfluxWriterByReadings00';
+local exampleLambdaName = 'MyLambda';
 local exampleLambda = l.new(exampleLambdaName)
+                      // TODO: This is not great
                       + l.withQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/')
+                      // TODO: Can we follow the context.wrap pattern here?
                       + q.withAccountId('278393477552');
 local exampleLambdaWithoutQuery = l.new(exampleLambdaName);
 
