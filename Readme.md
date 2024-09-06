@@ -30,7 +30,7 @@ local exampleLambdaInvocationTarget = exampleLambda.targets.invocations.withSum(
 
 ### Contexts
 
-Using resource constructs to interact with Cloudwatch metrics and statistics for resource is user friendly and concise interface. But resources by themselves do not have enough information to produce a valid panel target. This is what the Context construct is for, they are used to enrich entities like targets and queries to target accounts/regions/etc.
+Using resource constructs to interact with Cloudwatch metrics and statistics for a resource is a user friendly and concise interface. But resources by themselves do not have enough information to produce a valid panel target. This is what the Context construct is for, they are used to enrich entities like targets and queries to target accounts/regions/etc.
 
 ```
 local cloudwatchDatasource = g.dashboard.variable.datasource.new('datasource', 'cloudwatch');
