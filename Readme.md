@@ -44,12 +44,20 @@ local exampleLambda = l.new(exampleLambdaName)
 local exampleLambdaInvocationTarget = context.wrap([exampleLambda.targets.invocations.withSum()])
 ```
 
+### Dashboard variables
+
+TODO
+
+### Targets
+
+TODO
+
 ### Full Example
 
 ```
 local cloudwatchDatasource = g.dashboard.variable.datasource.new('datasource', 'cloudwatch');
-local accountId = g.query.cloudWatch.CloudWatchMetricsQuery.withAccountId('111111');
-local region = g.query.cloudWatch.CloudWatchMetricsQuery.withRegion('eu-west-1');
+local accountId = '111111';
+local region = 'eu-west-1';
 
 // Create a context object that can be used later to wrap Panel Targets
 local context = c.new()
