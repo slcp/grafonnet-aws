@@ -11,7 +11,7 @@ local convenienceTests = std.foldl(
     acc + std.foldl(
       function(acc, d)
         acc + test.case.new(
-          name='Lambda convenience',
+          name='Calling ' + l[c.lowerCaseFirstChar(m)]['by' + d] + ' should create the expected query object',
           test=test.expect.eq(
             actual=base + l[c.lowerCaseFirstChar(m)]['by' + d]('regex input'),
             expected=base { regex: 'regex input' } + { query+: {
