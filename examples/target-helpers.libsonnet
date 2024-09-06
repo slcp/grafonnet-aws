@@ -1,6 +1,8 @@
 local qbase = import '../lib/queries/base.libsonnet';
 local queryContext = import '../lib/queries/context.libsonnet';
+local kinesisQuery = import '../lib/queries/kinesis.libsonnet';
 local lambdaQuery = import '../lib/queries/lambda.libsonnet';
+local kinesis = import '../lib/resources/kinesis.libsonnet';
 local lambda = import '../lib/resources/lambda.libsonnet';
 local targetContext = import '../lib/targets/context.libsonnet';
 local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
@@ -22,7 +24,7 @@ local builtQueryContext = queryContext.new()
                           + queryContext.withRegion(region)
                           + queryContext.withDatasourceFromVariable(cloudwatchDatasource);
 
-
+// Lambda
 local exampleLambdaName = 'MyLambda';
 // exampleLambdaQueryVariable will be used as the variable label but the variable name will be hashed - why?
 local exampleLambdaQuery = qbase.new('exampleLambdaQueryVariable')
@@ -40,9 +42,32 @@ local lambdaPanel = grafana.panel.timeSeries.new('Some lambda data')
                       exampleLambda.targets.duration.withAverage(),
                     ]));
 
-local variables = builtQueryContext.wrap([exampleLambdaQuery]) + [cloudwatchDatasource];
+// Kinesis Stream
+local exampleKinesisName = 'MyKinesisStream';
+// exampleKinesisQueryVariable will be used as the variable label but the variable name will be hashed - why?
+local exampleKinesisQuery = qbase.new('exampleKinesisQueryVariable')
+                            + kinesisQuery.incomingRecords.byStreamName('/.*' + exampleKinesisName + '.*/');
+local exampleKinesis = kinesis.new(exampleKinesisName)
+                       // Binding to `name` here will use the query output whenever resource name (egrafana. withFunctionName) is going to be used
+                       + exampleKinesisQuery.bind('name');
+
+local kinesisPanel = grafana.panel.timeSeries.new('Some kinesis data')
+                     + grafana.panel.timeSeries.standardOptions.withUnit('short')
+                     + grafana.panel.timeSeries.options.withTooltip({ mode: 'multi' })
+                     + grafana.panel.timeSeries.queryOptions.withTargetsMixin(builtTargetContext.wrap([
+                       exampleKinesis.targets.incomingRecords.withSum(),
+                       exampleKinesis.targets.incomingBytes.withSum(),
+                     ]));
+
+
+local variables = builtQueryContext.wrap(
+  [
+    exampleLambdaQuery,
+    exampleKinesisQuery,
+  ]
+) + [cloudwatchDatasource];
 local panelWidth = 24;
-local panels = [lambdaPanel];
+local panels = [lambdaPanel, kinesisPanel];
 
 local dashboard = grafana.dashboard.new(name)
                   + grafana.dashboard.withDescription(description)

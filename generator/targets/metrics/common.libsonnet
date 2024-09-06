@@ -5,7 +5,7 @@ local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
 // Helpers
 local renderMetricFunc(m) =
   (a.field_function.new(
-     a.id.new('with' + m),
+     a.id.new('with' + c.sanitizeMetricName(m)),
      a.binary.new(
        '+',
        a.functioncall.new(
@@ -72,7 +72,7 @@ local renderDimensionHelper(d, m) =
     a.id.new('with' + d),
     a.binary_sum.new([
       a.functioncall.new(
-        a.literal.new('$' + '.metrics.with' + m)
+        a.literal.new('$' + '.metrics.with' + c.sanitizeMetricName(m))
       ),
       a.functioncall.new(
         a.literal.new('$' + '.dimensions.with' + d)
@@ -97,7 +97,7 @@ local renderDimensionHelper(d, m) =
   );
 
 local renderMetricHelper(m, dimensions) = a.field.new(
-  a.id.new(c.lowerCaseFirstChar(m)),
+  a.id.new(c.sanitizeMetricName(c.lowerCaseFirstChar(m))),
   a.object.new(
     [
       renderDimensionHelper(d, m)

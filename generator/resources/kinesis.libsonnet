@@ -1,10 +1,10 @@
 local c = import '../common.libsonnet';
-local l = import '../targets/metrics/lambda.libsonnet';
-local mc = import '../targets/metrics/common.libsonnet';
 local s = import '../statistics.libsonnet';
+local mc = import '../targets/metrics/common.libsonnet';
+local l = import '../targets/metrics/kinesis.libsonnet';
 local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
 
-local destinationPath = 'resources/lambda.libsonnet';
+local destinationPath = 'resources/kinesis.libsonnet';
 local metricsRelativePath = '../targets/metrics';
 
 local renderStatistic(s, fn) = a.field_function.new(
@@ -19,12 +19,12 @@ local renderStatistics(sts, fn) = std.map(function(s) renderStatistic(s, fn), st
 
 local renderTargetFunc(m) =
   a.field.new(
-    a.id.new(c.lowerCaseFirstChar(m)),
+    a.id.new(c.sanitizeMetricName(c.lowerCaseFirstChar(m))),
     a.object.new(
       renderStatistics(
         s.statistics,
         // TODO: Dynamically build for all dimesnions with resources
-        a.functioncall.new(a.literal.new('lambda.' + c.lowerCaseFirstChar(m) + '.withFunctionName'))
+        a.functioncall.new(a.literal.new('kinesis.' + c.sanitizeMetricName(c.lowerCaseFirstChar(m)) + '.withStreamName'))
         + a.functioncall.withArgs(a.literal.new('root.name')),
       )
     )
@@ -68,7 +68,7 @@ local renderNew() =
 {
   path: destinationPath,
   render(): c.render(
-    c.renderImportToLocalToString('lambda', metricsRelativePath + '/lambda.libsonnet')
+    c.renderImportToLocalToString('kinesis', metricsRelativePath + '/kinesis.libsonnet')
     + c.renderImportToLocalToString('statistics', metricsRelativePath + '/statistics.libsonnet')
     + '\n'
     + c.renderObjectToString([renderNew()]),
