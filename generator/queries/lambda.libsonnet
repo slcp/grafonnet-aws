@@ -1,5 +1,5 @@
 local c = import '../common.libsonnet';
-local l = import '../lambda.libsonnet';
+local l = import '../targets/metrics/lambda.libsonnet';
 local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
 local g = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
 

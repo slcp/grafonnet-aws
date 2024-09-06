@@ -1,5 +1,5 @@
 // Imports
-local c = import './common.libsonnet';
+local c = import '../../common.libsonnet';
 local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
 
 // Helpers

@@ -1,4 +1,4 @@
-local generator = import '../../generator/lambda.libsonnet';
+local generator = import '../../generator/targets/metrics/lambda.libsonnet';
 local l = import '../../lib/queries/lambda.libsonnet';
 local c = import '../common.libsonnet';
 local g = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';

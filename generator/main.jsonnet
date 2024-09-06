@@ -1,8 +1,8 @@
 local files = [
-  import './lambda.libsonnet',
+  import './targets/metrics/lambda.libsonnet',
   import './statistics.libsonnet',
   import './queries/lambda.libsonnet',
-  import './resources.libsonnet',
+  import './resources/lambda.libsonnet',
 ];
 
 {

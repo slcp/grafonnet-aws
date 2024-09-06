@@ -1,5 +1,5 @@
-local c = import './common.libsonnet';
-local mc = import './metrics-common.libsonnet';
+local c = import '../../common.libsonnet';
+local mc = import './common.libsonnet';
 
 local destinationPath = 'targets/metrics/lambda.libsonnet';
 local namespace = 'AWS/Lambda';

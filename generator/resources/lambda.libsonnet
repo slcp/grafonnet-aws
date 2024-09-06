@@ -1,7 +1,7 @@
-local c = import './common.libsonnet';
-local l = import './lambda.libsonnet';
-local mc = import './metrics-common.libsonnet';
-local s = import './statistics.libsonnet';
+local c = import '../common.libsonnet';
+local l = import '../targets/metrics/lambda.libsonnet';
+local mc = import '../targets/metrics/common.libsonnet';
+local s = import '../statistics.libsonnet';
 local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
 
 local destinationPath = 'resources/lambda.libsonnet';
