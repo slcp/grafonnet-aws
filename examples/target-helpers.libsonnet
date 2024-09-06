@@ -1,8 +1,8 @@
-local lambdaQuery = import '../lib/queries/lambda.libsonnet';
 local qbase = import '../lib/queries/base.libsonnet';
+local queryContext = import '../lib/queries/context.libsonnet';
+local lambdaQuery = import '../lib/queries/lambda.libsonnet';
 local lambda = import '../lib/resources/lambda.libsonnet';
 local targetContext = import '../lib/targets/context.libsonnet';
-local queryContext = import '../lib/queries/context.libsonnet';
 local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
 
 local name = 'New dashboard';
@@ -13,20 +13,20 @@ local accountId = '278393477552';  // OR $accountId
 local region = 'eu-west-1';  // OR §region
 
 local builtTargetContext = targetContext.new()
-                + targetContext.withAccountId(accountId)
-                + targetContext.withRegion(region)
-                + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
+                           + targetContext.withAccountId(accountId)
+                           + targetContext.withRegion(region)
+                           + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
 
 local builtQueryContext = queryContext.new()
-                     + queryContext.withAccountId(accountId)
-                     + queryContext.withRegion(region)
-                     + queryContext.withDatasourceFromVariable(cloudwatchDatasource);
+                          + queryContext.withAccountId(accountId)
+                          + queryContext.withRegion(region)
+                          + queryContext.withDatasourceFromVariable(cloudwatchDatasource);
 
 
 local exampleLambdaName = 'MyLambda';
 // exampleLambdaQueryVariable will be used as the variable label but the variable name will be hashed - why?
 local exampleLambdaQuery = qbase.new('exampleLambdaQueryVariable')
-                            + lambdaQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/');
+                           + lambdaQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/');
 local exampleLambda = lambda.new(exampleLambdaName)
                       // Binding to `name` here will use the query output whenever resource name (egrafana. withFunctionName) is going to be used
                       + exampleLambdaQuery.bind('name');
@@ -40,7 +40,7 @@ local lambdaPanel = grafana.panel.timeSeries.new('Some lambda data')
                       exampleLambda.targets.duration.withAverage(),
                     ]));
 
-local variables =  builtQueryContext.wrap([exampleLambdaQuery]) + [cloudwatchDatasource];
+local variables = builtQueryContext.wrap([exampleLambdaQuery]) + [cloudwatchDatasource];
 local panelWidth = 24;
 local panels = [lambdaPanel];
 

@@ -10,7 +10,7 @@ local cloudwatchMetrics = grafana.query.cloudWatch.CloudWatchMetricsQuery;
           local region = if std.objectHas(root, 'region') then {
             query+: {
               region: root.region,
-            }
+            },
           }
           else {};
           local accountId = if std.objectHas(root, 'accountId') then {

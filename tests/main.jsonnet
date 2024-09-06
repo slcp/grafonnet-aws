@@ -1,8 +1,8 @@
-local lambdaQ = import './queries/lambda.libsonnet';
 local baseQ = import './queries/base.libsonnet';
 local contextQ = import './queries/context.libsonnet';
-local lambdaM = import './targets/metrics/lambda.libsonnet';
+local lambdaQ = import './queries/lambda.libsonnet';
 local contextT = import './targets/context.libsonnet';
+local lambdaM = import './targets/metrics/lambda.libsonnet';
 
 {
   metrics: {
@@ -15,5 +15,5 @@ local contextT = import './targets/context.libsonnet';
   },
   targets: {
     context: contextT,
-  }
+  },
 }
