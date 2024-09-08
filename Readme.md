@@ -56,19 +56,51 @@ local DevAccountTargets = DevAccountContext.wrap([exampleLambda.targets.invocati
 
 ### Contexts
 
-Using resource constructs to interact with Cloudwatch metrics and statistics for a resource is a user friendly and concise interface. But resources by themselves do not have enough information to produce a valid panel target. This is what the Context construct is for, they are used to enrich entities like targets and queries to target accounts/regions/etc.
+Context constructs work with both Resource and Variable constructs to allow them to be reusable in different use cases. The responsibility of a Context is to carry the knowledge of AWS region, AWS account ID and Grafana Datasource, a Context is then able to enrich a Resource or Variable at the point of use so that they are complete and meaningful.
 
-```
-local cloudwatchDatasource = g.dashboard.variable.datasource.new('datasource', 'cloudwatch');
-local context = c.new()
-                + c.withAccountId("accountId")
-                + c.withRegion("region")
-                + c.withDatasourceFromVariable(cloudwatchDatasource);
+#### Resource Contexts
 
-local exampleLambda = l.new(exampleLambdaName)
-// This can now be used as a fully valid target in a panel
-local exampleLambdaInvocationTarget = context.wrap([exampleLambda.targets.invocations.withSum()])
+An example - a Context may be used with a Resource to target just a single account like this:
+
+```js
+local lambda = import 'github.com/slcp/grafonnet-aws/lib';
+local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
+
+local cloudwatchDatasource = grafana.dashboard.variable.datasource.new('datasource', 'cloudwatch');
+local AddNumbersLambda = lambda.new('AddNumbersLambda');
+
+local DevAccountContext = targetContext.new()
+                + targetContext.withAccountId("11111")
+                + targetContext.withRegion("eu-west-1")
+                + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
+
+local DevAccountTargets = DevAccountContext.wrap([
+    AddNumbersLambda.targets.invocations.withSum(),
+    AddNumbersLambda.targets.errors.withSum(),
+    AddNumbersLambda.targets.duration.withSum(),
+])
 ```
+
+Using Contexts in a static way like above is a valid use case but often something more dynamic will be required.
+
+An example - combining a Context with the use of Grafana variables is a powerful way to begin to be able to represent Resources dynamically in response to the changes in value of the variables. This is not new Grafana behaviour but Contexts are also intended to to be used in this scenario:
+
+```js
+local ResourceContext = targetContext.new()
+                + targetContext.withAccountId("$accountId")
+                + targetContext.withRegion("$region")
+                + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
+
+local Targets = ResourceContext.wrap([
+    AddNumbersLambda.targets.invocations.withSum(),
+    AddNumbersLambda.targets.errors.withSum(),
+    AddNumbersLambda.targets.duration.withSum(),
+])
+```
+
+#### Variable Contexts
+
+TODO
 
 ### Dashboard variables
 
@@ -78,38 +110,6 @@ TODO
 
 TODO
 
-### Full Example
-
-```
-local cloudwatchDatasource = g.dashboard.variable.datasource.new('datasource', 'cloudwatch');
-local accountId = '111111';
-local region = 'eu-west-1';
-
-// Create a context object that can be used later to wrap Panel Targets
-local context = c.new()
-                + c.withAccountId(accountId)
-                + c.withRegion(region)
-                + c.withDatasourceFromVariable(cloudwatchDatasource);
-
-
-local examplePartialLambdaName = 'MyPartialLambdaName';
-local exampleLambda = l.new(exampleLambdaName)
-                      + l.withQuery.invocations.byFunctionName('/.*' + examplePartialLambdaName + '.*/')
-                      + q.withAccountId('111111');
-
-local lambdaPanel = g.panel.timeSeries.new('Some lambda data')
-                    + g.panel.timeSeries.standardOptions.withUnit('short')
-                    + g.panel.timeSeries.options.withTooltip({ mode: 'multi' })
-                    + g.panel.timeSeries.queryOptions.withTargetsMixin(
-                        // Wrap Panel Targets with the context
-                        context.wrap([
-                            exampleLambda.targets.invocations.withSum(),
-                            exampleLambda.targets.errors.withSum(),
-                            exampleLambda.targets.duration.withAverage(),
-                        ])
-                    );
-```
-
 ## Examples
 
-Please see the examples folder for this information.
+Please see the `./examples` folder for this information.
