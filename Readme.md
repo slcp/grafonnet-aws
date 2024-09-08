@@ -56,9 +56,9 @@ local DevAccountTargets = DevAccountContext.wrap([exampleLambda.targets.invocati
 
 ### Contexts
 
-Context constructs work with both Resource and Variable constructs to allow them to be reusable in different use cases. The responsibility of a Context is to carry the knowledge of AWS region, AWS account ID and Grafana Datasource, a Context is then able to enrich a Resource or Variable at the point of use so that they are complete and meaningful.
+Context constructs work with both Target and Variable constructs to allow them to be reusable in different use cases. The responsibility of a Context is to carry the knowledge of AWS region, AWS account ID and Grafana Data Source, a Context is then able to enrich a Target or Variable at the point of use so that they are complete and meaningful.
 
-#### Resource Contexts
+#### Target Contexts
 
 An example - a Context may be used with a Resource to target just a single account like this:
 
@@ -83,15 +83,15 @@ local DevAccountTargets = DevAccountContext.wrap([
 
 Using Contexts in a static way like above is a valid use case but often something more dynamic will be required.
 
-An example - combining a Context with the use of Grafana variables is a powerful way to begin to be able to represent Resources dynamically in response to the changes in value of the variables. This is not new Grafana behaviour but Contexts are also intended to to be used in this scenario:
+An example - combining a Context with the use of Grafana variables is a powerful way to begin to be able to represent Targets dynamically in response to the changes in value of the variables. This is not new Grafana behaviour but Contexts are also intended to to be used in this scenario:
 
 ```js
-local ResourceContext = targetContext.new()
+local TargetContext = targetContext.new()
                 + targetContext.withAccountId("$accountId")
                 + targetContext.withRegion("$region")
                 + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
 
-local Targets = ResourceContext.wrap([
+local Targets = TargetContext.wrap([
     AddNumbersLambda.targets.invocations.withSum(),
     AddNumbersLambda.targets.errors.withSum(),
     AddNumbersLambda.targets.duration.withSum(),
@@ -108,7 +108,21 @@ TODO
 
 ### Targets
 
-TODO
+Target constructs provide convenience methods that produce panel targets. They provide methods for all metrics and across all dimensions for a particular resource type and/or Cloudwatch Metrics namespace. It is important to note that Targets by themselves will lack some context, see Contexts. To produce panel targets for some lambda metrics it would look like this:
+
+```js
+local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
+local lambdaTargets = import 'github.com/slcp/grafonnet-aws/lib/targets/metrics/lambda.libsonnet';
+local statistics = import 'github.com/slcp/grafonnet-aws/lib/targets/metrics/statistics.libsonnet';
+
+local FunctionName = 'MyFunctionName';
+local ErrorsTarget = lambdaTargets.invocations.withFunctionName(FunctionName)
+                     + statistics.withSum()
+
+local Targets = TargetsContext.wrap([ErrorsTarget])
+```
+
+Targets are valid constructs by themselves and intended to provide a high level of control with minimal internal defaults.
 
 ## Examples
 
