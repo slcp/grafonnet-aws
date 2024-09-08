@@ -102,9 +102,72 @@ local Targets = TargetContext.wrap([
 
 TODO
 
-### Dashboard variables
+### Variables
 
-TODO
+Variable constructs are for constructing queries that represent dashboard variables. In Grafonnet AWS the inspiration for this construct is using them to identify a logical resource in different environments or AWS accounts. For example if you have multiple AWS accounts (e.g. Development and Production) with the same infrastructure in (e.g. an `AddNumbers` Lambda) but with non-identical names a dashboard variable can help dynamically locate this resource across each account from the same dashboard. An example is identifying this lambda by invocations and Function Name in a Cloudwatch Metrics query:
+
+```js
+local lambdaQuery = import 'github.com/slcp/grafonnet-aws/lib/queries/lambda.libsonnet';
+local queryBase = import 'github.com/slcp/grafonnet-aws/lib/queries/base.libsonnet';
+local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
+
+// This creates a dashboard variable with an identifier of $<hash of 'AddNumbersLambda'>
+// This creates a dashboard variable with an label of AddNumbersLambda
+local AddNumbersVariable = queryBase.new('AddNumbersLambda')
+                           + lambdaQuery.invocations.byFunctionName('/.*AddNumbersLambda.*/');
+
+local dashboard = grafana.dashboard.new('MyDashboard')
+                  + grafana.dashboard.withVariablesMixin([AddNumbersVariable])
+```
+
+Variables internally will query by regex so a valid regex should be passed if for the value of the dimension be queried, in the above example this is Function Name. This expectation of a regex needs to change as the library develops further, it has been chosen as a default as it provides the most power when using the library. A query can return zero or more results, the use case above and that inspired Variable constructs is that they are expected to return 1 result.
+
+On their own Variable instances construct valid but incomplete dashboard variables, use Variable Contexts to enrich and complete them as required.
+
+```js
+local queryContext = import 'github.com/slcp/grafonnet-aws/lib/queries/context.libsonnet';
+
+local AccountContext = queryContext.new()
+                          + queryContext.withAccountId('$accountId')
+                          + queryContext.withRegion('$region')
+                          + queryContext.withDatasourceFromVariable(cloudwatchDatasource);
+
+local AddNumbersVariable = queryBase.new('AddNumbersLambda')
+                           + lambdaQuery.invocations.byFunctionName('/.*AddNumbersLambda.*/');
+
+local dashboard = grafana.dashboard.new('MyDashboard')
+                  + grafana.dashboard.withVariablesMixin(AccountContext.wrap([AddNumbersVariable]))
+```
+
+Through the use of Variable Contexts Variable instances can be reused if required and enriched at the point of use with a Context.
+
+Variable Constructs are powerful when bound with Resources. When a Variable Construct is bound with a Resource a user configurable property can be overwritten on the resource with the Variable identifier. This means that the dynamic results of the Variable can be used natively with Resources in things like panel targets. For example:
+
+```js
+local AccountContext = queryContext.new()
+                          // $accountId is the identifier for a dashboard variable created with raw grafonnet
+                          // The selected value of $accountId is likely controlled by the dashboard viewer
+                          + queryContext.withAccountId('$accountId')
+                          + queryContext.withRegion('$region')
+                          + queryContext.withDatasourceFromVariable(cloudwatchDatasource);
+
+local AddNumbersVariable = queryBase.new('AddNumbersLambda')
+                           + lambdaQuery.invocations.byFunctionName('/.*AddNumbersLambda.*/');
+local AddNumbersLambda = lambda.new('AddNumbersLambda')
+                         // The `name` property will be of the Resource will overwritten
+                         // The `name` property is used when a target is created using the default FunctionName dimension 
+                         + AddNumbersVariable.bind('name')
+
+local Targets = [
+    AddNumbersLambda.targets.invocations.withSum(),
+    AddNumbersLambda.targets.errors.withSum(),
+    AddNumbersLambda.targets.duration.withSum(),
+]
+
+local dashboard = grafana.dashboard.new('MyDashboard')
+                  + grafana.dashboard.withVariablesMixin(AccountContext.wrap([AddNumbersVariable]))
+                  + grafana.panel.timeSeries.queryOptions.withTargetsMixin(Targets)
+```
 
 ### Targets
 

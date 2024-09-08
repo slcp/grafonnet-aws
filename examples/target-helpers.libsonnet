@@ -26,7 +26,6 @@ local builtQueryContext = queryContext.new()
 
 // Lambda
 local exampleLambdaName = 'MyLambda';
-// exampleLambdaQueryVariable will be used as the variable label but the variable name will be hashed - why?
 local exampleLambdaQuery = qbase.new('exampleLambdaQueryVariable')
                            + lambdaQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/');
 local exampleLambda = lambda.new(exampleLambdaName)
@@ -44,7 +43,6 @@ local lambdaPanel = grafana.panel.timeSeries.new('Some lambda data')
 
 // Kinesis Stream
 local exampleKinesisName = 'MyKinesisStream';
-// exampleKinesisQueryVariable will be used as the variable label but the variable name will be hashed - why?
 local exampleKinesisQuery = qbase.new('exampleKinesisQueryVariable')
                             + kinesisQuery.incomingRecords.byStreamName('/.*' + exampleKinesisName + '.*/');
 local exampleKinesis = kinesis.new(exampleKinesisName)
