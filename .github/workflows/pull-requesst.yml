@@ -17,6 +17,11 @@ jobs:
           node-version: 20
           cache: npm
 
+      - uses: kobtea/setup-jsonnet-action@v2
+
+      - name: Install dependencies
+        run: npm run install
+
       - name: Lint
         run: npm run lint
 
@@ -31,6 +36,11 @@ jobs:
         with:
           node-version: 20
           cache: npm
+
+      - uses: kobtea/setup-jsonnet-action@v2
+
+      - name: Install dependencies
+        run: npm run install
 
       - name: Unit tests
         run: npm run test
