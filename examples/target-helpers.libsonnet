@@ -11,61 +11,61 @@ local name = 'New dashboard';
 local description = 'This is a new dashboard';
 
 local cloudwatchDatasource = grafana.dashboard.variable.datasource.new('datasource', 'cloudwatch');
-local accountId = '278393477552';  // OR $accountId
-local region = 'eu-west-1';  // OR §region
+local accountId = '111111111';
+local region = 'eu-west-1';
 
-local builtTargetContext = targetContext.new()
+local TargetAccountContext = targetContext.new()
                            + targetContext.withAccountId(accountId)
                            + targetContext.withRegion(region)
                            + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
 
-local builtQueryContext = queryContext.new()
+local QueryAccountContext = queryContext.new()
                           + queryContext.withAccountId(accountId)
                           + queryContext.withRegion(region)
                           + queryContext.withDatasourceFromVariable(cloudwatchDatasource);
 
 // Lambda
-local exampleLambdaName = 'MyLambda';
-local exampleLambdaQuery = qbase.new('exampleLambdaQueryVariable')
-                           + lambdaQuery.invocations.byFunctionName('/.*' + exampleLambdaName + '.*/');
-local exampleLambda = lambda.new(exampleLambdaName)
-                      // Binding to `name` here will use the query output whenever resource name (egrafana. withFunctionName) is going to be used
-                      + exampleLambdaQuery.bind('name');
+local LambdaName = 'MyLambda';
+local LambdaQuery = qbase.new('LambdaQueryVariable')
+                           + lambdaQuery.invocations.byFunctionName('/.*' + LambdaName + '.*/');
+local Lambda = lambda.new(LambdaName)
+                      // Binding to `name` here will use the query output whenever resource name (eg. withFunctionName) is going to be used
+                      + LambdaQuery.bind('name');
 
-local lambdaPanel = grafana.panel.timeSeries.new('Some lambda data')
+local LambdaPanel = grafana.panel.timeSeries.new('Some lambda data')
                     + grafana.panel.timeSeries.standardOptions.withUnit('short')
                     + grafana.panel.timeSeries.options.withTooltip({ mode: 'multi' })
-                    + grafana.panel.timeSeries.queryOptions.withTargetsMixin(builtTargetContext.wrap([
-                      exampleLambda.targets.invocations.withSum(),
-                      exampleLambda.targets.errors.withSum(),
-                      exampleLambda.targets.duration.withAverage(),
+                    + grafana.panel.timeSeries.queryOptions.withTargetsMixin(TargetAccountContext.wrap([
+                      Lambda.targets.invocations.withSum(),
+                      Lambda.targets.errors.withSum(),
+                      Lambda.targets.duration.withAverage(),
                     ]));
 
 // Kinesis Stream
-local exampleKinesisName = 'MyKinesisStream';
-local exampleKinesisQuery = qbase.new('exampleKinesisQueryVariable')
-                            + kinesisQuery.incomingRecords.byStreamName('/.*' + exampleKinesisName + '.*/');
-local exampleKinesis = kinesis.new(exampleKinesisName)
-                       // Binding to `name` here will use the query output whenever resource name (egrafana. withFunctionName) is going to be used
-                       + exampleKinesisQuery.bind('name');
+local KinesisName = 'MyKinesisStream';
+local KinesisQuery = qbase.new('KinesisQueryVariable')
+                            + kinesisQuery.incomingRecords.byStreamName('/.*' + KinesisName + '.*/');
+local Kinesis = kinesis.new(KinesisName)
+                       // Binding to `name` here will use the query output whenever resource name (eg. withFunctionName) is going to be used
+                       + KinesisQuery.bind('name');
 
-local kinesisPanel = grafana.panel.timeSeries.new('Some kinesis data')
+local KinesisPanel = grafana.panel.timeSeries.new('Some kinesis data')
                      + grafana.panel.timeSeries.standardOptions.withUnit('short')
                      + grafana.panel.timeSeries.options.withTooltip({ mode: 'multi' })
-                     + grafana.panel.timeSeries.queryOptions.withTargetsMixin(builtTargetContext.wrap([
-                       exampleKinesis.targets.incomingRecords.withSum(),
-                       exampleKinesis.targets.incomingBytes.withSum(),
+                     + grafana.panel.timeSeries.queryOptions.withTargetsMixin(TargetAccountContext.wrap([
+                       Kinesis.targets.incomingRecords.withSum(),
+                       Kinesis.targets.incomingBytes.withSum(),
                      ]));
 
 
-local variables = builtQueryContext.wrap(
+local variables = QueryAccountContext.wrap(
   [
-    exampleLambdaQuery,
-    exampleKinesisQuery,
+    LambdaQuery,
+    KinesisQuery,
   ]
 ) + [cloudwatchDatasource];
 local panelWidth = 24;
-local panels = [lambdaPanel, kinesisPanel];
+local panels = [LambdaPanel, KinesisPanel];
 
 local dashboard = grafana.dashboard.new(name)
                   + grafana.dashboard.withDescription(description)
