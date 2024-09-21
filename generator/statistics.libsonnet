@@ -17,7 +17,7 @@ local renderStatistics(s) = std.map(renderStatistic, s);
   render(): c.render(
     c.renderObjectToString(
       renderStatistics(statistics)
-    ),
+    ), { renderCloudwatchMetrics: true, renderGrafana: true }
   ),
   statistics: statistics,
 }

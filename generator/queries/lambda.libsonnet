@@ -1,7 +1,6 @@
 local c = import '../common.libsonnet';
 local l = import '../targets/metrics/lambda.libsonnet';
 local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
-local g = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
 
 local destinationPath = 'queries/lambda.libsonnet';
 local metricsRelativePath = '../targets/metrics';
@@ -107,6 +106,6 @@ local renderWithAccountId() =
         // TODO: Build an accountId construct and treat it as a first class citizen
         renderWithAccountId(),
       ]
-    ),
+    ), { renderCloudwatchMetrics: false, renderGrafana: true }
   ),
 }

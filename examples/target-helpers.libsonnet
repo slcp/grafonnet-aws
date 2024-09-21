@@ -15,22 +15,22 @@ local accountId = '111111111';
 local region = 'eu-west-1';
 
 local TargetAccountContext = targetContext.new()
-                           + targetContext.withAccountId(accountId)
-                           + targetContext.withRegion(region)
-                           + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
+                             + targetContext.withAccountId(accountId)
+                             + targetContext.withRegion(region)
+                             + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
 
 local QueryAccountContext = queryContext.new()
-                          + queryContext.withAccountId(accountId)
-                          + queryContext.withRegion(region)
-                          + queryContext.withDatasourceFromVariable(cloudwatchDatasource);
+                            + queryContext.withAccountId(accountId)
+                            + queryContext.withRegion(region)
+                            + queryContext.withDatasourceFromVariable(cloudwatchDatasource);
 
 // Lambda
 local LambdaName = 'MyLambda';
 local LambdaQuery = qbase.new('LambdaQueryVariable')
-                           + lambdaQuery.invocations.byFunctionName('/.*' + LambdaName + '.*/');
+                    + lambdaQuery.invocations.byFunctionName('/.*' + LambdaName + '.*/');
 local Lambda = lambda.new(LambdaName)
-                      // Binding to `name` here will use the query output whenever resource name (eg. withFunctionName) is going to be used
-                      + LambdaQuery.bind('name');
+               // Binding to `name` here will use the query output whenever resource name (eg. withFunctionName) is going to be used
+               + LambdaQuery.bind('name');
 
 local LambdaPanel = grafana.panel.timeSeries.new('Some lambda data')
                     + grafana.panel.timeSeries.standardOptions.withUnit('short')
@@ -44,10 +44,10 @@ local LambdaPanel = grafana.panel.timeSeries.new('Some lambda data')
 // Kinesis Stream
 local KinesisName = 'MyKinesisStream';
 local KinesisQuery = qbase.new('KinesisQueryVariable')
-                            + kinesisQuery.incomingRecords.byStreamName('/.*' + KinesisName + '.*/');
+                     + kinesisQuery.incomingRecords.byStreamName('/.*' + KinesisName + '.*/');
 local Kinesis = kinesis.new(KinesisName)
-                       // Binding to `name` here will use the query output whenever resource name (eg. withFunctionName) is going to be used
-                       + KinesisQuery.bind('name');
+                // Binding to `name` here will use the query output whenever resource name (eg. withFunctionName) is going to be used
+                + KinesisQuery.bind('name');
 
 local KinesisPanel = grafana.panel.timeSeries.new('Some kinesis data')
                      + grafana.panel.timeSeries.standardOptions.withUnit('short')

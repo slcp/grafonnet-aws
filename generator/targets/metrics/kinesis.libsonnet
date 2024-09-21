@@ -45,7 +45,7 @@ local dimensions = [
         mc.renderMetrics(metrics),
         mc.renderDimensions(dimensions),
       ] + mc.renderHelpers(metrics, dimensions)
-    ),
+    ), { renderCloudwatchMetrics: true, renderGrafana: true }
   ),
   metrics: metrics,
   dimensions: dimensions,

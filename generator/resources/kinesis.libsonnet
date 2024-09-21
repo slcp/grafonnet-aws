@@ -1,6 +1,5 @@
 local c = import '../common.libsonnet';
 local s = import '../statistics.libsonnet';
-local mc = import '../targets/metrics/common.libsonnet';
 local l = import '../targets/metrics/kinesis.libsonnet';
 local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
 
