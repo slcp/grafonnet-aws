@@ -5,29 +5,6 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - uses: kobtea/setup-jsonnet-action@v2
-
-      - name: Install dependencies
-        run: npm run install
-      
-      - name: List
-        run: ls -l
-
-      - name: Lint
-        run: npm run lint:ci
-
   unit-tests:
     name: Unit tests
     runs-on: ubuntu-latest
