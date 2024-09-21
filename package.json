@@ -10,8 +10,9 @@
   "scripts": {
     "install": "jb install",
     "setup:macos": "brew install go-jsonnet jsonnet-bundler",
-    "lint": "npm run generate:lib && npm run generate:examples && npm run fmt && npm run lint:ci",
-    "lint:ci": "./scripts/lint.sh",
+    "prelint": "npm run generate:lib && npm run generate:examples && npm run fmt",
+    "lint": "./scripts/lint.sh",
+    "lint:ci": "./scripts/lint-ci.sh",
     "fmt": "jsonnetfmt -i **/*.jsonnet **/*.libsonnet",
     "test": "jsonnet -J vendor tests/main.jsonnet",
     "generate:examples": "jsonnet -J vendor -c -m examples examples/main.jsonnet",
