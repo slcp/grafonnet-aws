@@ -28,7 +28,9 @@ jobs:
         run: ls -l
 
       - name: Lint
-        run: npm run lint:ci
+        run: |
+          chmod +x ./scripts/lint.sh
+          npm run lint:ci
 
   unit-tests:
     name: Unit tests
