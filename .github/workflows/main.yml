@@ -28,7 +28,7 @@ jobs:
         run: ls -l scripts
 
       - name: Lint
-        run: ./scripts/lint.sh
+        run: npm run lint:ci
 
   unit-tests:
     name: Unit tests

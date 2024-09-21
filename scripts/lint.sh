@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 find -f \
     generator/*.jsonnet \
