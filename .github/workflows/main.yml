@@ -25,7 +25,7 @@ jobs:
         run: npm run install
 
       - name: List
-        run: ls -l
+        run: ls -l scripts
 
       - name: Lint
         run: |
