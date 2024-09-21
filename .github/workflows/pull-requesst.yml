@@ -21,9 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: npm run install
+      
+      - name: List
+        run: ls -l
 
       - name: Lint
-        run: npm run lint
+        run: npm run lint:ci
 
   unit-tests:
     name: Unit tests
