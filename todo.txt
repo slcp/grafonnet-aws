@@ -1,0 +1,3 @@
+main.libsonnet in lib exporting everything from the lib for a single entry point
+
+Create main.libsonnet files for each folder
