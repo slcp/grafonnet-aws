@@ -1,0 +1,67 @@
+{
+  "lambda": {
+    "namespace": "AWS/Lambda",
+    "metrics": [
+      "Invocations",
+      "Errors",
+      "DeadLetterErrors",
+      "DestinationDeliveryFailures",
+      "Throttles",
+      "OversizedRecordCount",
+      "ProvisionedConcurrencyInvocations",
+      "ProvisionedConcurrencySpilloverInvocations",
+      "RecursiveInvocationsDropped",
+      "Duration",
+      "PostRuntimeExtensionsDuration",
+      "IteratorAge",
+      "OffsetLag",
+      "ConcurrentExecutions",
+      "ProvisionedConcurrentExecutions",
+      "ProvisionedConcurrencyUtilization",
+      "UnreservedConcurrentExecutions",
+      "ClaimedAccountConcurrency",
+      "AsyncEventsReceived",
+      "AsyncEventAge",
+      "AsyncEventsDropped"
+    ],
+    "dimensions": [
+      "FunctionName",
+      "Resource",
+      "ExecutedVersion"
+    ]
+  },
+  "kinesis": {
+    "namespace": "AWS/Kinesis",
+    "metrics": [
+      "GetRecords.Bytes",
+      "GetRecords.IteratorAge",
+      "GetRecords.IteratorAgeMilliseconds",
+      "GetRecords.Latency",
+      "GetRecords.Records",
+      "GetRecords.Success",
+      "IncomingBytes",
+      "IncomingRecords",
+      "PutRecord.Bytes",
+      "PutRecord.Latency",
+      "PutRecord.Success",
+      "PutRecords.Bytes",
+      "PutRecords.Latency",
+      "PutRecords.Success",
+      "PutRecords.TotalRecords",
+      "PutRecords.SuccessfulRecords",
+      "PutRecords.FailedRecords",
+      "PutRecords.ThrottledRecords",
+      "ReadProvisionedThroughputExceeded",
+      "SubscribeToShard.RateExceeded",
+      "SubscribeToShard.Success",
+      "SubscribeToShardEvent.Bytes",
+      "SubscribeToShardEvent.MillisBehindLatest",
+      "SubscribeToShardEvent.Records",
+      "SubscribeToShardEvent.Success",
+      "WriteProvisionedThroughputExceeded"
+    ],
+    "dimensions": [
+      "StreamName"
+    ]
+  }
+}
