@@ -25,6 +25,16 @@ To install Grafonnet AWS with [jsonnet-bundler](https://github.com/jsonnet-bundl
 jb install github.com/slcp/grafonnet-aws/lib@main
 ```
 
+## Development
+
+To set up a development environment, use the helper script:
+
+```bash
+./scripts/install.sh
+```
+
+A VS Code dev container is provided in the `.devcontainer` directory with Go, Jsonnet, and jb preinstalled. The container runs the setup script automatically after creation.
+
 ## Usage
 
 ### Quick Start: AWS Lambda

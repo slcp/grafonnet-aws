@@ -1,0 +1,14 @@
+{
+  "name": "grafonnet-aws",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "postCreateCommand": "./scripts/install.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go"
+      ]
+    }
+  }
+}
