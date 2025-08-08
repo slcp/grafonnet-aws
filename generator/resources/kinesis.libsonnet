@@ -1,6 +1,6 @@
 local c = import '../common.libsonnet';
 local s = import '../statistics.libsonnet';
-local l = import '../targets/metrics/kinesis.libsonnet';
+local l = (import '../targets/metrics/config.json').kinesis;
 local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
 
 local destinationPath = 'resources/kinesis.libsonnet';

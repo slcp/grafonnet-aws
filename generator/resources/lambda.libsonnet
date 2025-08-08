@@ -1,5 +1,5 @@
 local c = import '../common.libsonnet';
-local l = import '../targets/metrics/lambda.libsonnet';
+local l = (import '../targets/metrics/config.json').lambda;
 local s = import '../statistics.libsonnet';
 local a = import 'github.com/crdsonnet/astsonnet/main.libsonnet';
 

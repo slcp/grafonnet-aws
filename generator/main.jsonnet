@@ -1,6 +1,5 @@
-local files = [
-  import './targets/metrics/lambda.libsonnet',
-  import './targets/metrics/kinesis.libsonnet',
+local metricTargets = import './targets/metrics/config.libsonnet';
+local files = std.objectValues(metricTargets) + [
   import './statistics.libsonnet',
   import './queries/lambda.libsonnet',
   import './queries/kinesis.libsonnet',

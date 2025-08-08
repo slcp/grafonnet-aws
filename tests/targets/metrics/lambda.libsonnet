@@ -1,4 +1,4 @@
-local generator = import '../../../generator/targets/metrics/lambda.libsonnet';
+local generator = (import '../../../generator/targets/metrics/config.json').lambda;
 local lambda = import '../../../lib/targets/metrics/lambda.libsonnet';
 local common = import '../../common.libsonnet';
 local test = import 'github.com/jsonnet-libs/testonnet/main.libsonnet';
