@@ -27,34 +27,77 @@ jb install github.com/slcp/grafonnet-aws/lib@main
 
 ## Usage
 
-### Example Workflow
+### Quick Start: AWS Lambda
 
-Here’s a simple example to illustrate how Grafonnet AWS can be used to create a Grafana dashboard with AWS Lambda metrics:
+The snippet below walks through creating a basic dashboard for a Lambda function. Each step is annotated to highlight the pattern:
 
 ```jsonnet
+// Import Grafonnet and grafonnet-aws helpers
 local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
 local targetContext = import 'github.com/slcp/grafonnet-aws/lib/targets/context.libsonnet';
 local lambda = import 'github.com/slcp/grafonnet-aws/lib/resources/lambda.libsonnet';
 
+// Declare the Lambda resource we want to monitor
 local AddNumbersLambda = lambda.new('AddNumbersLambda');
+
+// Create a datasource variable and context (account + region)
 local cloudwatchDatasource = grafana.dashboard.variable.datasource.new('cloudwatch', 'CloudWatch');
 local DevContext = targetContext.new()
                 + targetContext.withAccountId("11111")
                 + targetContext.withRegion("eu-west-1")
                 + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
 
+// Build a panel with the Lambda invocation metric
 local lambdaPanel = grafana.panel.timeSeries.new('Lambda Metrics')
               + grafana.panel.timeSeries.queryOptions.withTargetsMixin([
                     DevContext.wrap([AddNumbersLambda.targets.invocations.withSum()])
                 ]);
 
+// Assemble the dashboard
 local dashboard = grafana.dashboard.new('My Dashboard')
                   + grafana.dashboard.withPanels([lambdaPanel]);
 
 dashboard
 ```
 
-This example shows how to define a Lambda resource, apply context (account ID and region), and create a Grafana panel to display Lambda metrics.
+This quick start shows how to define a Lambda resource, apply context (account ID and region), and create a Grafana panel to display Lambda metrics.
+
+### Quick Start: Amazon Kinesis
+
+Kinesis streams follow the same pattern. The example below adds a panel with Kinesis metrics:
+
+```jsonnet
+// Import helpers
+local grafana = import 'github.com/grafana/grafonnet/gen/grafonnet-latest/main.libsonnet';
+local targetContext = import 'github.com/slcp/grafonnet-aws/lib/targets/context.libsonnet';
+local kinesis = import 'github.com/slcp/grafonnet-aws/lib/resources/kinesis.libsonnet';
+
+// Define the stream to monitor
+local MyStream = kinesis.new('MyStream');
+
+// Reuse the same CloudWatch datasource and context pattern
+local cloudwatchDatasource = grafana.dashboard.variable.datasource.new('cloudwatch', 'CloudWatch');
+local DevContext = targetContext.new()
+                + targetContext.withAccountId("11111")
+                + targetContext.withRegion("eu-west-1")
+                + targetContext.withDatasourceFromVariable(cloudwatchDatasource);
+
+// Panel with commonly used Kinesis metrics
+local kinesisPanel = grafana.panel.timeSeries.new('Kinesis Metrics')
+                + grafana.panel.timeSeries.queryOptions.withTargetsMixin([
+                      DevContext.wrap([
+                        MyStream.targets.incomingRecords.withSum(),
+                        MyStream.targets.incomingBytes.withSum(),
+                      ])
+                  ]);
+
+local dashboard = grafana.dashboard.new('Kinesis Dashboard')
+                  + grafana.dashboard.withPanels([kinesisPanel]);
+
+dashboard
+```
+
+The Kinesis example mirrors the Lambda workflow, demonstrating how common patterns—imports, context creation, and panel construction—carry across services.
 
 ### Resources
 
@@ -76,6 +119,15 @@ local Panel = grafana.panel.timeSeries.new('Lambda Metrics')
 ```
 
 Resources simplify the process of adding AWS metrics to dashboards by providing convenient methods for common use cases. Resources will lack some context, see **Contexts**.
+
+Similarly, Kinesis streams can be represented as resources:
+
+```jsonnet
+local kinesis = import 'github.com/slcp/grafonnet-aws/lib/resources/kinesis.libsonnet';
+local MyStream = kinesis.new('MyStream');
+```
+
+`MyStream` exposes helpers for metrics like `incomingRecords` and `incomingBytes` that can be added to panels using the same patterns shown above.
 
 ### Contexts
 
@@ -159,4 +211,4 @@ Targets allow for fine-grained control over which metrics are displayed in your 
 
 ## Examples
 
-For more detailed examples, including how to configure Lambda metrics in Grafana dashboards, visit the [`examples` folder](./examples) in the repository.
+For more detailed examples, including dashboards that combine Lambda and Kinesis metrics, visit the [`examples` folder](./examples) in the repository.
