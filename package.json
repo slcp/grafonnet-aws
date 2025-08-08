@@ -17,7 +17,8 @@
     "test": "jsonnet -J vendor tests/main.jsonnet",
     "generate:examples": "jsonnet -J vendor -c -m examples examples/main.jsonnet",
     "pregenerate:lib": "rm -rf ./lib",
-    "generate:lib": "cp -r generator/static lib && jsonnet -J vendor -S -c -m lib generator/main.jsonnet",
+    "generate:metrics": "node scripts/generate-metrics.js",
+    "generate:lib": "npm run generate:metrics && cp -r generator/static lib && jsonnet -J vendor -S -c -m lib generator/main.jsonnet",
     "postgenerate:lib": "find ./lib/ -name *.libsonnet -type f -exec jsonnetfmt -i {} \\;"
   },
   "author": "",
